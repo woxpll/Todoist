@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {TableModule} from "primeng/table";
 import {CalendarModule} from "primeng/calendar";
+import {DropdownModule} from "primeng/dropdown";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {CalendarModule} from "primeng/calendar";
     BrowserAnimationsModule,
     MatToolbarModule,
     TableModule,
-    CalendarModule
+    CalendarModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

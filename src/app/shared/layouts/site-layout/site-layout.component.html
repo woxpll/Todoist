@@ -20,7 +20,13 @@
     ></p-calendar>
   </div>
   <div>
-    <input type="text" pInputText formControlName="priority"/>
+    <p-dropdown
+      formControlName="priority"
+      [options]="priority"
+      [showClear]="true"
+      optionLabel="name"
+      placeholder="Выбрать приоритет"
+    ></p-dropdown>
   </div>
   <p-button
     type="submit"
@@ -32,12 +38,12 @@
 <p-table [value]="tasks" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template  pTemplate="header">
     <tr>
-      <th>Название задачи</th>
-      <th>Описание задачи</th>
-      <th>Категория задачи</th>
-      <th>Срок задачи</th>
-      <th>Проиритет задачи</th>
-      <th>Статус задачи</th>
+      <th pSortableColumn="name" style="width:15%">Название задачи<p-sortIcon field="name"></p-sortIcon></th>
+      <th pSortableColumn="description" style="width:15%">Описание задачи<p-sortIcon field="description"></p-sortIcon></th>
+      <th pSortableColumn="category" style="width:15%">Категория задачи<p-sortIcon field="category"></p-sortIcon></th>
+      <th pSortableColumn="deadline" style="width:15%">Срок задачи<p-sortIcon field="deadline"></p-sortIcon></th>
+      <th pSortableColumn="priority" style="width:15%">Проиритет задачи<p-sortIcon field="priority"></p-sortIcon></th>
+      <th pSortableColumn="status" style="width:15%">Статус задачи<p-sortIcon field="status"></p-sortIcon></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-task>
@@ -46,7 +52,7 @@
       <td>{{task.description}}</td>
       <td>{{task.category}}</td>
       <td>{{task.deadline}}</td>
-      <td>{{task.priority}}</td>
+      <td>{{task.priority.name}}</td>
       <td>{{task.status}}</td>
 
     </tr>
