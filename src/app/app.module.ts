@@ -15,6 +15,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {PasswordModule} from "primeng/password";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {TableModule} from "primeng/table";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     InputTextModule,
     PasswordModule,
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
