@@ -6,7 +6,9 @@
       "description": 3,
       "category": 4,
       "deadline": "01.01.2000",
-      "priority": 6,
+      "priority": {
+        "name": "Срочно"
+      },
       "status": false
     }
   ]

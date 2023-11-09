@@ -4,6 +4,8 @@ export interface Task{
   description: string
   category: string
   deadline: string
-  priority: string
+  priority: {
+    name: string
+  }
   status: boolean
 }

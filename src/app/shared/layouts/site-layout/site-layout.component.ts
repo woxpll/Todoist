@@ -3,6 +3,11 @@ import {Task} from "../../interfaces/task";
 import {TaskService} from "../../services/task.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
+
+interface Priority{
+  name: string
+}
+
 @Component({
   selector: 'app-site-layout',
   templateUrl: './site-layout.component.html',
@@ -15,6 +20,8 @@ export class SiteLayoutComponent implements OnInit{
 
   form!: FormGroup
 
+  priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
+
   constructor(private taskService: TaskService) { }
 
 
@@ -26,15 +33,15 @@ export class SiteLayoutComponent implements OnInit{
       name: new FormControl("", Validators.required),
       description: new FormControl("", Validators.required),
       category: new FormControl("", Validators.required),
-      deadline: new FormControl("", Validators.required),
+      deadline: new FormControl(this.priority, Validators.required),
       priority: new FormControl("", Validators.required),
     })
   }
 
   getAllTask(){
-    this.taskService.getAllTask().subscribe(res => {
-      this.tasks = res
-      console.log(res)
+    this.taskService.getAllTask().subscribe(next => {
+      this.tasks = next
+      console.log(next)
     },error => {
       alert(error)
     })
@@ -48,11 +55,10 @@ export class SiteLayoutComponent implements OnInit{
 
   submit(){
     const {name, description, category, deadline, priority, status = false} = this.task = this.form.value
-    console.log(status)
-    console.log(this.task)
-    this.tasks.push({name,description, category, deadline, priority, status})
-    // this.addTask(this.task)
+    this.form.reset()
+    this.tasks.push({name,description, category, deadline, priority , status})
 
+    console.log(this.tasks)
   }
 
 }

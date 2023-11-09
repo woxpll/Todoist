@@ -20,7 +20,13 @@
     ></p-calendar>
   </div>
   <div>
-    <input type="text" pInputText formControlName="priority"/>
+    <p-dropdown
+      formControlName="priority"
+      [options]="priority"
+      [showClear]="true"
+      optionLabel="name"
+      placeholder="Выбрать приоритет"
+    ></p-dropdown>
   </div>
   <p-button
     type="submit"
@@ -46,7 +52,7 @@
       <td>{{task.description}}</td>
       <td>{{task.category}}</td>
       <td>{{task.deadline}}</td>
-      <td>{{task.priority}}</td>
+      <td>{{task.priority.name}}</td>
       <td>{{task.status}}</td>
 
     </tr>
