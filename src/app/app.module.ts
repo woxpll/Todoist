@@ -16,6 +16,7 @@ import {PasswordModule} from "primeng/password";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {TableModule} from "primeng/table";
+import {CalendarModule} from "primeng/calendar";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {TableModule} from "primeng/table";
     PasswordModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    TableModule
+    TableModule,
+    CalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

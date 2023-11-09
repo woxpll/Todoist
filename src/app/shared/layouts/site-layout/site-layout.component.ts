@@ -10,13 +10,10 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class SiteLayoutComponent implements OnInit{
 
-
+  task!: Task
   tasks!: Task[]
 
   form!: FormGroup
-
-  addTaskValue: string = ""
-  addDescriptionValue: string = ""
 
   constructor(private taskService: TaskService) { }
 
@@ -27,7 +24,10 @@ export class SiteLayoutComponent implements OnInit{
 
     this.form = new FormGroup<any>({
       name: new FormControl("", Validators.required),
-      description: new FormControl("", Validators.required)
+      description: new FormControl("", Validators.required),
+      category: new FormControl("", Validators.required),
+      deadline: new FormControl("", Validators.required),
+      priority: new FormControl("", Validators.required),
     })
   }
 
@@ -40,15 +40,19 @@ export class SiteLayoutComponent implements OnInit{
     })
   }
 
-  addTask(){
+  addTask(task: Task){
+    this.taskService.addTask(task).subscribe(next => {
 
+    })
   }
 
   submit(){
-    const {name, description} = this.form.value
-    console.log(name)
-    this.tasks.push({name,description})
-    console.log(this.tasks)
+    const {name, description, category, deadline, priority, status = false} = this.task = this.form.value
+    console.log(status)
+    console.log(this.task)
+    this.tasks.push({name,description, category, deadline, priority, status})
+    // this.addTask(this.task)
+
   }
 
 }

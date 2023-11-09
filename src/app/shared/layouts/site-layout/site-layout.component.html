@@ -3,10 +3,24 @@
   (ngSubmit)="submit()"
 >
   <div>
-    <input type="text" pInputText formControlName="name" [(ngModel)]="addTaskValue"/>
+    <input type="text" pInputText formControlName="name"/>
   </div>
   <div>
-    <input type="text" pInputText formControlName="description" [(ngModel)]="addDescriptionValue"/>
+    <input type="text" pInputText formControlName="description"/>
+  </div>
+  <div>
+    <input type="text" pInputText formControlName="category"/>
+  </div>
+  <div>
+    <p-calendar
+      dateFormat="dd.mm.yy"
+      formControlName="deadline"
+      [showIcon]="true"
+      dataType="string"
+    ></p-calendar>
+  </div>
+  <div>
+    <input type="text" pInputText formControlName="priority"/>
   </div>
   <p-button
     type="submit"
@@ -14,8 +28,6 @@
     [disabled]="form.invalid"
   ></p-button>
 </form>
-
-
 
 <p-table [value]="tasks" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template  pTemplate="header">

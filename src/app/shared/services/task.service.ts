@@ -23,16 +23,6 @@ export class TaskService {
     return this.http.put<Task>(`${this.serviceURL}/${task.id}`, task)
   }
 
-
-  getTaskData(){
-    return[
-
-    ]
-  }
-
-  getTask(){
-    return Promise.resolve(this.getTaskData())
-  }
   constructor(private http: HttpClient) {
     this.serviceURL = "http://localhost:3000/tasks"
   }
