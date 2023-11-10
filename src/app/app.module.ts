@@ -18,6 +18,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {TableModule} from "primeng/table";
 import {CalendarModule} from "primeng/calendar";
 import {DropdownModule} from "primeng/dropdown";
+import {DialogModule} from "primeng/dialog";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {DropdownModule} from "primeng/dropdown";
     MatToolbarModule,
     TableModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

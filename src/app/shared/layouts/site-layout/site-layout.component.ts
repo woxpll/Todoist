@@ -73,4 +73,10 @@ export class SiteLayoutComponent implements OnInit{
     console.log(this.tasks)
   }
 
+  visible: boolean = false;
+
+  showDialog() {
+    this.visible = true;
+  }
+
 }
