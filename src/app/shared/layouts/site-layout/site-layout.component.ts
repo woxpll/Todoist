@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Task} from "../../interfaces/task";
 import {TaskService} from "../../services/task.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -59,14 +59,32 @@ export class SiteLayoutComponent implements OnInit{
   }
 
   editTask(task: Task){
-    console.log(task)
-    this.formEdit.patchValue({
+    this.formEdit.setValue({
       name: task.name,
       description: task.description,
       category: task.category,
       deadline: task.deadline,
-      priority: task.priority.name
+      priority: task.priority
     })
+  }
+
+  submitEdit(){
+    console.log(this.task)
+    const index = this.tasks.findIndex(n => n.id === this.task.id)
+    console.log(index)
+    const {name, description, category, deadline, priority} = this.task = this.formEdit.value
+
+    // @ts-ignore
+    this.tasks = this.tasks.reduce((acc, task: Task)=>{
+      // @ts-ignore
+      if(task.id === index){
+        console.log(155555)
+        return [...acc, {name: name, description: description, category: category, deadline: deadline, priority: priority }]
+      }
+      return [...acc, task]
+    },[])
+
+    this.visible = false
   }
 
   addTask(task: Task){
@@ -85,6 +103,7 @@ export class SiteLayoutComponent implements OnInit{
 
   submit(){
     const {name, description, category, deadline, priority, status = false} = this.task = this.form.value
+    console.log(name)
     this.task.status = false
     console.log(this.task)
 
@@ -99,6 +118,7 @@ export class SiteLayoutComponent implements OnInit{
   showDialog(task: Task) {
     this.visible = true;
     this.editTask(task)
+    this.task = task
   }
 
 }

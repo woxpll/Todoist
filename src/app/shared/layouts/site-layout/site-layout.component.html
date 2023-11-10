@@ -64,7 +64,6 @@
           </ng-template>
           <form
             [formGroup]="formEdit"
-            (ngSubmit)="submit()"
           >
             <div>
               <input type="text" pInputText formControlName="name"/>
@@ -89,17 +88,23 @@
                 [options]="priority"
                 [showClear]="true"
                 optionLabel="name"
-                [placeholder]="task.priority"
+                placeholder="Выбрать приоритет"
               ></p-dropdown>
             </div>
-            <p-button
-              type="submit"
-              label="Submit"
-              [disabled]="form.invalid"
-            ></p-button>
           </form>
           <ng-template pTemplate="footer">
-            <p-button icon="pi pi-check" (click)="visible = false" label="Ok" styleClass="p-button-text"></p-button>
+            <form
+              [formGroup]="formEdit"
+              (ngSubmit)="submitEdit()"
+            >
+              <p-button
+                type="submit"
+                label="Ok"
+                styleClass="p-button-text"
+                icon="pi pi-check"
+              ></p-button>
+            </form>
+
           </ng-template>
         </p-dialog>
 
