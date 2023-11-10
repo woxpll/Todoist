@@ -53,13 +53,20 @@ export class SiteLayoutComponent implements OnInit{
     })
   }
 
+  deleteTask(task: Task){
+    const index = this.tasks.findIndex(n => n.id === task.id)
+    delete this.tasks[index]
+    // this.taskService.deleteTask(task).subscribe(next=> {
+    //
+    // })
+  }
+
   submit(){
     const {name, description, category, deadline, priority, status = false} = this.task = this.form.value
     this.task.status = false
     console.log(this.task)
 
     this.addTask(this.task)
-
     this.form.reset()
     this.tasks.push({name,description, category, deadline, priority , status})
 
