@@ -59,7 +59,6 @@ export class SiteLayoutComponent implements OnInit{
     console.log(this.task)
 
     this.addTask(this.task)
-
     this.form.reset()
     this.tasks.push({name,description, category, deadline, priority , status})
 
