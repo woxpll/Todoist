@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Task} from "../../interfaces/task";
 import {TaskService} from "../../services/task.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -19,10 +19,13 @@ export class SiteLayoutComponent implements OnInit{
   tasks!: Task[]
 
   form!: FormGroup
+  formEdit!: FormGroup
+
 
   priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
 
   constructor(private taskService: TaskService) { }
+
 
 
   ngOnInit(): void {
@@ -36,6 +39,14 @@ export class SiteLayoutComponent implements OnInit{
       deadline: new FormControl(this.priority, Validators.required),
       priority: new FormControl("", Validators.required),
     })
+    this.formEdit = new FormGroup<any>({
+      name: new FormControl("345", Validators.required),
+      description: new FormControl("", Validators.required),
+      category: new FormControl("", Validators.required),
+      deadline: new FormControl(this.priority, Validators.required),
+      priority: new FormControl("", Validators.required),
+    })
+
   }
 
   getAllTask(){
@@ -44,6 +55,17 @@ export class SiteLayoutComponent implements OnInit{
       console.log(next)
     },error => {
       alert(error)
+    })
+  }
+
+  editTask(task: Task){
+    console.log(task)
+    this.formEdit.patchValue({
+      name: task.name,
+      description: task.description,
+      category: task.category,
+      deadline: task.deadline,
+      priority: task.priority.name
     })
   }
 
@@ -66,17 +88,17 @@ export class SiteLayoutComponent implements OnInit{
     this.task.status = false
     console.log(this.task)
 
-    this.addTask(this.task)
+    // this.addTask(this.task)
     this.form.reset()
     this.tasks.push({name,description, category, deadline, priority , status})
 
-    console.log(this.tasks)
   }
 
   visible: boolean = false;
 
-  showDialog() {
+  showDialog(task: Task) {
     this.visible = true;
+    this.editTask(task)
   }
 
 }
