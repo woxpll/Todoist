@@ -69,17 +69,19 @@ export class SiteLayoutComponent implements OnInit{
   }
 
   submitEdit(){
-    console.log(this.task)
     const index = this.tasks.findIndex(n => n.id === this.task.id)
-    console.log(index)
+    const status = this.task.status
+    const id = this.task.id
     const {name, description, category, deadline, priority} = this.task = this.formEdit.value
+    this.task.id = id
+    this.task.status = status
 
     // @ts-ignore
     this.tasks = this.tasks.reduce((acc, task: Task)=>{
       // @ts-ignore
       if(task.id === index){
         console.log(155555)
-        return [...acc, {name: name, description: description, category: category, deadline: deadline, priority: priority }]
+        return [...acc, {id: this.task.id ,name: name, description: description, category: category, deadline: deadline, priority: priority, status: this.task.status }]
       }
       return [...acc, task]
     },[])
