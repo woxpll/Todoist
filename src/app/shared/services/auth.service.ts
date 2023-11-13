@@ -22,14 +22,14 @@ export class AuthService {
     return this.http.post<User>(this.serviceURL, user)
   }
 
-  login(user: User): Observable<User>{
-    return this.http.get<User>(`${this.serviceURL}/?email=${user.email}&&?password=${user.password}`)
+  login(user: User): Observable<User[]>{
+    return this.http.get<User[]>(`${this.serviceURL}/?email=${user.email}&password=${user.password}`)
       .pipe(
         tap(
-          (user: User)=>{
-            localStorage.setItem("email", user.email)
-            localStorage.setItem("password", user.password)
-            this.setStorage(user.email, user.password)
+          (userResponse: User[])=>{
+            localStorage.setItem("email", userResponse[0].email)
+            localStorage.setItem("password", userResponse[0].password)
+            this.setStorage(userResponse[0].email, userResponse[0].password)
           }
         )
       )
