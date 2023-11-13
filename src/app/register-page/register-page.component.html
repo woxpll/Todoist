@@ -50,7 +50,11 @@
     </div>
 
     <div class="card flex justify-content-center">
-      <p-button label="Submit"></p-button>
+      <p-button
+        type="submit"
+        [disabled]="form.invalid || form.disabled"
+        label="Создать"
+      ></p-button>
     </div>
   </p-card>
 </form>
