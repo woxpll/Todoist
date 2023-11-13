@@ -80,7 +80,6 @@ export class SiteLayoutComponent implements OnInit{
     this.tasks = this.tasks.reduce((acc, task: Task)=>{
       // @ts-ignore
       if(task.id === index){
-        console.log(155555)
         return [...acc, {id: this.task.id ,name: name, description: description, category: category, deadline: deadline, priority: priority, status: this.task.status }]
       }
       return [...acc, task]

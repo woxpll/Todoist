@@ -6,29 +6,29 @@ import {SiteLayoutComponent} from "./shared/layouts/site-layout/site-layout.comp
 import {RegisterPageComponent} from "./register-page/register-page.component";
 
 const routes: Routes = [
-  // {
-  //   path: "",
-  //   component: AuthLayoutComponent,
-  //   children: [
-  //     {
-  //       path: "",
-  //       redirectTo: "login",
-  //       pathMatch: "full"
-  //     },
-  //     {
-  //       path: "login",
-  //       component: LoginPageComponent
-  //     },
-  //     {
-  //       path: "register",
-  //       component: RegisterPageComponent
-  //     }
-  //   ]
-  // },
   {
     path: "",
-    component: SiteLayoutComponent
-  }
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: "",
+        redirectTo: "login",
+        pathMatch: "full"
+      },
+      {
+        path: "login",
+        component: LoginPageComponent
+      },
+      {
+        path: "register",
+        component: RegisterPageComponent
+      }
+    ]
+  },
+  // {
+  //   path: "",
+  //   component: SiteLayoutComponent
+  // }
 ];
 
 @NgModule({

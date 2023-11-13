@@ -8,15 +8,17 @@ import {Observable} from "rxjs";
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {
+  serviceURL: string;
 
+  constructor(private http: HttpClient) {
+    this.serviceURL = "http://localhost:3000/users"
   }
   register(){
 
   }
 
-  login(user: User): Observable<any>{
-    return this.http.post("", user)
+  login(user: User): Observable<User>{
+    return this.http.post<User>(this.serviceURL, user)
   }
 
 
