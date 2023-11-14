@@ -35,24 +35,20 @@ export class LoginPageComponent implements OnInit, OnDestroy{
   }
   ngOnDestroy(): void {
     if (this.aSub){
-      this.aSub.unsubscribe()
+      // this.aSub.unsubscribe()
     }
   }
 
   onSubmit(){
     this.form.disable()
 
-    this.auth.logInWithEmailAndPassword(this.form.value.email, this.form.value.password)
+    this.auth.logInWithEmailAndPassword(this.form.value.email, this.form.value.password).then(() => {
+      this.router.navigate(["/dashboard"])
+      console.log("Login success")
+    }).catch((error) => {
+      console.warn(error)
+      this.form.enable()
+    })
 
-    // this.aSub = this.auth.login(this.form.value).subscribe(
-    //   () =>{
-    //     // this.router.navigate(["/main"])
-    //     console.log("Login success")
-    //   },
-    //   error => {
-    //     console.warn(error)
-    //     this.form.enable()
-    //   }
-    // )
   }
 }

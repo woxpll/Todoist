@@ -1,4 +1,4 @@
-import {Injectable, NgZone} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 
@@ -10,8 +10,7 @@ export class AuthService {
   userData: any
 
   constructor(private firebaseAuthenticationService: AngularFireAuth,
-              private router: Router,
-              private ngZone: NgZone) {
+              private router: Router) {
     this.firebaseAuthenticationService.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
@@ -21,33 +20,23 @@ export class AuthService {
       }
     })
   }
-
   logInWithEmailAndPassword(email: string, password: string) {
     return this.firebaseAuthenticationService.signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         this.userData = userCredential.user
-        this.observeUserState()
       })
       .catch((error) => {
         alert(error.message);
       })
   }
-
   signUpWithEmailAndPassword(email: string, password: string) {
     return this.firebaseAuthenticationService.createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         this.userData = userCredential.user
-        this.observeUserState()
       })
       .catch((error) => {
         alert(error.message);
       })
-  }
-
-  observeUserState() {
-    this.firebaseAuthenticationService.authState.subscribe((userState) => {
-      userState && this.ngZone.run(() => this.router.navigate(['dashboard']))
-    })
   }
 
   get isLoggedIn(): boolean {
@@ -55,7 +44,6 @@ export class AuthService {
     return user !== null;
   }
 
-  // logOut
   loggut() {
     return this.firebaseAuthenticationService.signOut().then(() => {
       localStorage.removeItem('user');
