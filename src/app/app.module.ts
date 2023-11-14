@@ -19,9 +19,11 @@ import {TableModule} from "primeng/table";
 import {CalendarModule} from "primeng/calendar";
 import {DropdownModule} from "primeng/dropdown";
 import {DialogModule} from "primeng/dialog";
+
+
 import {provideFirebaseApp} from "@angular/fire/app";
 import {environment} from "../environments/environmen";
-import firebase from "firebase/compat";
+import firebase from "firebase/compat/app";
 import initializeApp = firebase.initializeApp;
 import {getAuth, provideAuth} from "@angular/fire/auth";
 import {AngularFireModule} from "@angular/fire/compat";

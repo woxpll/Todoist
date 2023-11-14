@@ -1,60 +1,66 @@
-import { Injectable } from '@angular/core';
-import {User} from "../interfaces/user";
-import {HttpClient} from "@angular/common/http";
-import {Observable, tap} from "rxjs";
+import {Injectable, NgZone} from '@angular/core';
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  serviceURL: string;
+  userData: any
 
-  user?: User
-
-  private email: string | null = null;
-  private password: string | null = null
-
-  constructor(private http: HttpClient) {
-    this.serviceURL = "http://localhost:3000/users"
-  }
-  register(user: User): Observable<User>{
-    return this.http.post<User>(this.serviceURL, user)
-  }
-
-  login(user: User): Observable<User[]>{
-    return this.http.get<User[]>(`${this.serviceURL}/?email=${user.email}&password=${user.password}`)
-      .pipe(
-        tap(
-          (userResponse: User[])=>{
-            localStorage.setItem("email", userResponse[0].email)
-            localStorage.setItem("password", userResponse[0].password)
-            this.setStorage(userResponse[0].email, userResponse[0].password)
-          }
-        )
-      )
+  constructor(private firebaseAuthenticationService: AngularFireAuth,
+              private router: Router,
+              private ngZone: NgZone) {
+    this.firebaseAuthenticationService.authState.subscribe((user) => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+      } else {
+        localStorage.setItem('user', 'null');
+      }
+    })
   }
 
-  setStorage(arg1: string | null, arg2: string | null){
-    this.email = arg1
-    this.password = arg2
-    console.log(this.email, this.password)
+  logInWithEmailAndPassword(email: string, password: string) {
+    return this.firebaseAuthenticationService.signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        this.userData = userCredential.user
+        this.observeUserState()
+      })
+      .catch((error) => {
+        alert(error.message);
+      })
   }
 
-  getStorage(): User {
-    return<User> {
-      email: this.email,
-      password: this.password
-    }
+  signUpWithEmailAndPassword(email: string, password: string) {
+    return this.firebaseAuthenticationService.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        this.userData = userCredential.user
+        this.observeUserState()
+      })
+      .catch((error) => {
+        alert(error.message);
+      })
   }
 
-  isAuthenticated(): boolean{
-    return !!this.email && !!this.password
+  observeUserState() {
+    this.firebaseAuthenticationService.authState.subscribe((userState) => {
+      userState && this.ngZone.run(() => this.router.navigate(['dashboard']))
+    })
   }
 
-  logout(){
-    this.setStorage(null, null)
-    localStorage.clear()
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user !== null;
+  }
+
+  // logOut
+  loggut() {
+    return this.firebaseAuthenticationService.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.router.navigate(['login']);
+    })
   }
 
 }
