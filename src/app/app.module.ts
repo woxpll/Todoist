@@ -19,6 +19,12 @@ import {TableModule} from "primeng/table";
 import {CalendarModule} from "primeng/calendar";
 import {DropdownModule} from "primeng/dropdown";
 import {DialogModule} from "primeng/dialog";
+import {provideFirebaseApp} from "@angular/fire/app";
+import {environment} from "../environments/environmen";
+import firebase from "firebase/compat";
+import initializeApp = firebase.initializeApp;
+import {getAuth, provideAuth} from "@angular/fire/auth";
+import {AngularFireModule} from "@angular/fire/compat";
 
 @NgModule({
   declarations: [
@@ -44,7 +50,13 @@ import {DialogModule} from "primeng/dialog";
     TableModule,
     CalendarModule,
     DropdownModule,
-    DialogModule
+    DialogModule,
+
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+
+    // error
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -33,6 +33,11 @@
       "email": "test1@mail.ru",
       "password": "1234556",
       "id": 2
+    },
+    {
+      "email": "test36@mail.ru",
+      "password": "123456",
+      "id": 3
     }
   ]
 }
