@@ -32,6 +32,10 @@ export class LoginPageComponent implements OnInit, OnDestroy{
       //   Для начала надо авторизоваться
       }
     })
+
+    if(localStorage.getItem("user") != null){
+      this.router.navigate(['/dashboard'])
+    }
   }
   ngOnDestroy(): void {
     if (this.aSub){
@@ -44,10 +48,9 @@ export class LoginPageComponent implements OnInit, OnDestroy{
 
     this.auth.logInWithEmailAndPassword(this.form.value.email, this.form.value.password).then(() => {
       this.router.navigate(["/dashboard"])
-      console.log("Login success")
-    }).catch((error) => {
-      console.warn(error)
       this.form.enable()
+      this.form.reset()
+    }).catch((error) => {
     })
 
   }
