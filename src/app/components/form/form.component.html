@@ -1,0 +1,36 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+  <div>
+    <input type="text" pInputText formControlName="name"/>
+  </div>
+  <div>
+    <input type="text" pInputText formControlName="description"/>
+  </div>
+  <div>
+    <input type="text" pInputText formControlName="category"/>
+  </div>
+  <div>
+    <p-calendar
+      dateFormat="dd.mm.yy"
+      formControlName="deadline"
+      [showIcon]="true"
+      dataType="string"
+    ></p-calendar>
+  </div>
+  <div>
+    <p-dropdown
+      formControlName="priority"
+      [options]="priority"
+      [showClear]="true"
+      optionLabel="name"
+      placeholder="Выбрать приоритет"
+    ></p-dropdown>
+  </div>
+  <p-button
+    type="submit"
+    label="Submit"
+    [disabled]="form.invalid"
+  ></p-button>
+</form>

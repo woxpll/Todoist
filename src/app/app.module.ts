@@ -4,10 +4,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginPageComponent } from './login-page/login-page.component';
+
+import { LoginPageComponent } from './components/login-page/login-page.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
-import { RegisterPageComponent } from './register-page/register-page.component';
+import { RegisterPageComponent } from './components/register-page/register-page.component';
+
 import {HttpClientModule} from "@angular/common/http";
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
@@ -27,6 +29,8 @@ import firebase from "firebase/compat/app";
 import initializeApp = firebase.initializeApp;
 import {getAuth, provideAuth} from "@angular/fire/auth";
 import {AngularFireModule} from "@angular/fire/compat";
+import { FormComponent } from './components/form/form.component';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,9 @@ import {AngularFireModule} from "@angular/fire/compat";
     LoginPageComponent,
     AuthLayoutComponent,
     SiteLayoutComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    FormComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
