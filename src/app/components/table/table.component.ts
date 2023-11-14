@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Task} from "../../shared/interfaces/task";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TaskService} from "../../shared/services/task.service";
