@@ -1,7 +1,7 @@
 {
   "tasks": [
     {
-      "id": 0,
+      "id": 1,
       "name": "dfgdffg",
       "description": "dfgdfg",
       "category": "dfg",
@@ -20,7 +20,7 @@
         "name": "Срочно"
       },
       "status": false,
-      "id": 1
+      "id": 2
     }
   ],
   "users": [
@@ -33,11 +33,6 @@
       "email": "test1@mail.ru",
       "password": "1234556",
       "id": 2
-    },
-    {
-      "email": "test36@mail.ru",
-      "password": "123456",
-      "id": 3
     }
   ]
 }

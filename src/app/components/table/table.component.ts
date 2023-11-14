@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Task} from "../../shared/interfaces/task";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TaskService} from "../../shared/services/task.service";
@@ -11,6 +11,7 @@ import {Priority} from "../../shared/interfaces/priority";
 })
 export class TableComponent implements OnInit{
 
+  @Input()
   task!: Task
   tasks!: Task[]
 
@@ -32,6 +33,9 @@ export class TableComponent implements OnInit{
       priority: new FormControl("", Validators.required),
     })
 
+    this.taskService.subscriber$.subscribe(data => {
+      this.tasks.push(data)
+    });
   }
 
   getAllTask(){

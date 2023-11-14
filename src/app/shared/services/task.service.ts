@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Task} from "../interfaces/task";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,13 @@ import {Observable} from "rxjs";
 export class TaskService {
 
   serviceURL: string
+
+  observer: Subject<Task> = new Subject()
+  subscriber$: Observable<Task>  = this.observer.asObservable();
+
+  emitData(data: Task) {
+    this.observer.next(data);
+  }
 
   addTask(task: Task): Observable<Task>{
     return this.http.post<Task>(this.serviceURL, task)

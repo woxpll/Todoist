@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Priority} from "../../shared/interfaces/priority";
+import {Task} from "../../shared/interfaces/task";
+import {TaskService} from "../../shared/services/task.service";
 
 @Component({
   selector: 'app-form',
@@ -9,11 +11,14 @@ import {Priority} from "../../shared/interfaces/priority";
 })
 export class FormComponent implements OnInit{
 
+  task!: Task
   form!: FormGroup
   priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
 
-  ngOnInit(): void {
+  constructor(private taskService: TaskService) {
+  }
 
+  ngOnInit(): void {
     this.form = new FormGroup<any>({
       name: new FormControl("", Validators.required),
       description: new FormControl("", Validators.required),
@@ -23,16 +28,18 @@ export class FormComponent implements OnInit{
     })
   }
 
+  addTask(task: Task){
+    this.taskService.addTask(task).subscribe()
+  }
 
   submit(){
-    // const {name, description, category, deadline, priority, status = false} = this.task = this.form.value
-    // console.log(name)
-    // this.task.status = false
-    // console.log(this.task)
+    const {name, description, category, deadline, priority, status = false} = this.task = this.form.value
+    this.task.status = false
+
+    this.taskService.emitData(this.task)
 
     // this.addTask(this.task)
     this.form.reset()
-    // this.tasks.push({name,description, category, deadline, priority , status})
   }
 
 }
