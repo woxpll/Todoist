@@ -11,10 +11,17 @@ export class TaskService {
   serviceURL: string
 
   observer: Subject<Task> = new Subject()
+  observerEdit: Subject<Task> = new Subject()
+
   subscriber$: Observable<Task>  = this.observer.asObservable();
+  subscriberEdit$: Observable<Task>  = this.observerEdit.asObservable();
 
   emitData(data: Task) {
     this.observer.next(data);
+  }
+
+  emitEditData(data: Task){
+    this.observerEdit.next(data)
   }
 
   addTask(task: Task): Observable<Task>{

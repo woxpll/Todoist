@@ -1,14 +1,14 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "name": "dfgdffg",
+      "name": "sdf",
       "description": "dfgdfg",
       "category": "dfg",
       "deadline": "01.01.2000",
       "priority": {
         "name": "Срочно"
       },
+      "id": 0,
       "status": false
     },
     {
@@ -20,7 +20,7 @@
         "name": "Срочно"
       },
       "status": false,
-      "id": 2
+      "id": 1
     }
   ]
 }

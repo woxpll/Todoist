@@ -22,19 +22,42 @@ export class TableComponent implements OnInit{
   ngOnInit(): void {
     this.tasks = []
     this.getAllTask()
-
     this.taskService.subscriber$.subscribe(data => {
       this.tasks.push(data)
     });
+    this.taskService.subscriberEdit$.subscribe(data => {
+      this.task = data
+      this.editTask(data)
+    })
   }
 
   getAllTask(){
     this.taskService.getAllTask().subscribe(next => {
       this.tasks = next
-      console.log(next)
     },error => {
       alert(error)
     })
+  }
+
+  editTask(task: Task){
+    this.taskService.editTask(task).subscribe(next => {
+      console.log(next)
+    })
+    const index: number = this.tasks.findIndex(n => n.id === task.id)
+    this.tasks = this.tasks.reduce((acc: Task[], task: Task): Task[] => {
+      if (task.id === index) {
+        return [...acc, {
+          id: this.task.id,
+          name: this.task.name,
+          description: this.task.description,
+          category: this.task.category,
+          deadline: this.task.deadline,
+          priority: this.task.priority,
+          status: this.task.status
+        }]
+      }
+      return [...acc, task]
+    }, [])
   }
 
   deleteTask(task: Task){
