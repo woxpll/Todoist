@@ -2,13 +2,24 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Task} from "../interfaces/task";
 import {Observable, Subject} from "rxjs";
+import {Data} from "../interfaces/data";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
+  dataStorage?: Data
+
   serviceURL: string
+  uid$: any = localStorage.getItem("user")
+
+  check(){
+    const uid = JSON.parse(this.uid$).uid
+    this.http.get<Data>(`${this.serviceURL}/${uid}`).subscribe(data => {
+      this.dataStorage = data
+    })
+  }
 
   observer: Subject<Task> = new Subject()
   observerEdit: Subject<Task> = new Subject()
@@ -38,7 +49,7 @@ export class TaskService {
   }
 
   constructor(private http: HttpClient) {
-    this.serviceURL = "http://localhost:3000/tasks"
+    this.serviceURL = "http://localhost:3000/users"
   }
 
 

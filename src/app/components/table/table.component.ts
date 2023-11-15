@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Task} from "../../shared/interfaces/task";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TaskService} from "../../shared/services/task.service";
-import {Priority} from "../../shared/interfaces/priority";
 
 @Component({
   selector: 'app-table',
@@ -14,12 +12,12 @@ export class TableComponent implements OnInit{
   task!: Task
   tasks!: Task[]
 
-
-  priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
-
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+
+    this.taskService.check()
+
     this.tasks = []
     this.getAllTask()
     this.taskService.subscriber$.subscribe(data => {
