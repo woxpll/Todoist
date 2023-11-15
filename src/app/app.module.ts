@@ -31,6 +31,7 @@ import {getAuth, provideAuth} from "@angular/fire/auth";
 import {AngularFireModule} from "@angular/fire/compat";
 import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
+import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TableComponent } from './components/table/table.component';
     SiteLayoutComponent,
     RegisterPageComponent,
     FormComponent,
-    TableComponent
+    TableComponent,
+    ModalDialogComponent
   ],
   imports: [
     BrowserModule,
