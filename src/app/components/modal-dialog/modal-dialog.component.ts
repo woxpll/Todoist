@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Priority} from "../../shared/interfaces/priority";
 import {Task} from "../../shared/interfaces/task";
@@ -10,8 +10,8 @@ import {Task} from "../../shared/interfaces/task";
 })
 export class ModalDialogComponent implements OnInit{
 
+  @Input()
   task!: Task
-  tasks!: Task[]
 
   priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
 
@@ -20,54 +20,25 @@ export class ModalDialogComponent implements OnInit{
 
   ngOnInit(): void {
     this.formEdit = new FormGroup<any>({
-      name: new FormControl("", Validators.required),
-      description: new FormControl("", Validators.required),
-      category: new FormControl("", Validators.required),
-      deadline: new FormControl(this.priority, Validators.required),
-      priority: new FormControl("", Validators.required),
-    })
-  }
-
-  editTask(task: Task){
-    this.formEdit.setValue({
-      name: task.name,
-      description: task.description,
-      category: task.category,
-      deadline: task.deadline,
-      priority: task.priority
+      name: new FormControl(this.task.name, Validators.required),
+      description: new FormControl(this.task.description, Validators.required),
+      category: new FormControl(this.task.category, Validators.required),
+      deadline: new FormControl(this.task.deadline, Validators.required),
+      priority: new FormControl(this.task.priority, Validators.required),
     })
   }
 
   submitEdit(){
-    const index: number = this.tasks.findIndex(n => n.id === this.task.id)
     const status = this.task.status
     const id = this.task.id
     const {name, description, category, deadline, priority} = this.task = this.formEdit.value
     this.task.id = id
     this.task.status = status
-
-    this.tasks = this.tasks.reduce((acc: Task[], task: Task): Task[] => {
-      if (task.id === index) {
-        return [...acc, {
-          id: this.task.id,
-          name: name,
-          description: description,
-          category: category,
-          deadline: deadline,
-          priority: priority,
-          status: this.task.status
-        }]
-      }
-      return [...acc, task]
-    }, [])
-
     this.visible = false
   }
 
-  showDialog(task: Task) {
+  showDialog() {
     this.visible = true;
-    this.editTask(task)
-    this.task = task
   }
 
 }

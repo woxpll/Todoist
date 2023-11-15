@@ -18,7 +18,7 @@
       <td>{{task.priority.name}}</td>
       <td>{{task.status}}
         <p-button icon="pi pi-check"></p-button>
-        <app-modal-dialog></app-modal-dialog>
+        <app-modal-dialog [task]="task"></app-modal-dialog>
         <p-button icon="pi pi-times" (click)="deleteTask(task)" severity="danger"></p-button>
       </td>
 
