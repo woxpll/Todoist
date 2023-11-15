@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Task} from "../interfaces/task";
-import {Observable, Subject} from "rxjs";
+import {Observable, pipe, Subject} from "rxjs";
 import {Data} from "../interfaces/data";
+import {DataUser} from "../classes/dataUser";
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,13 @@ export class TaskService {
 
   check(){
     const uid = JSON.parse(this.uid$).uid
-    this.http.get<Data>(`${this.serviceURL}/${uid}`).subscribe(data => {
-      this.dataStorage = data
-    })
+    this.http.get<Data>(`${this.serviceURL}/${uid}`).subscribe( (data) =>{
+        this.dataStorage = data
+      },
+      error => {
+        this.createNewUser(uid).subscribe()
+      }
+    )
   }
 
   observer: Subject<Task> = new Subject()
@@ -46,6 +51,11 @@ export class TaskService {
   }
   editTask(task: Task): Observable<Task>{
     return this.http.put<Task>(`${this.serviceURL}/${task.id}`, task)
+  }
+
+  createNewUser(uid: string){
+    const newUser = new DataUser(uid)
+    return this.http.post<Data>(this.serviceURL, newUser)
   }
 
   constructor(private http: HttpClient) {
