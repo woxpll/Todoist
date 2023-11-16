@@ -16,10 +16,10 @@ export class TableComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.taskService.check()
-
     this.tasks = []
     this.getAllTask()
+    this.taskService.check()
+
     this.taskService.subscriber$.subscribe(data => {
       this.tasks.push(data)
     });

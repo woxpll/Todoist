@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Task} from "../interfaces/task";
-import {Observable, Subject} from "rxjs";
+import {Observable, of, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,26 +10,28 @@ export class TaskService {
 
   dataStorage : any
 
+  isExists!: boolean
+
   serviceURL: string
   uid$: any = localStorage.getItem("user")
   uid = JSON.parse(this.uid$).uid
 
-  check(){
-    this.http.get(`${this.serviceURL}/?uid=${this.uid}`).subscribe( (data) =>{
-        this.dataStorage = data
-        console.log(data)
-      },
-      error => {
-        // this.createNewUser(uid).subscribe()
+  check() {
+    this.http.get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`).subscribe( (data) =>{
+        if (data.length === 0){
+          this.createNewUser(this.uid)
+        }
       }
     )
   }
 
   observer: Subject<Task> = new Subject()
   observerEdit: Subject<Task> = new Subject()
+  observerUID: Subject<string> = new Subject()
 
   subscriber$: Observable<Task>  = this.observer.asObservable();
   subscriberEdit$: Observable<Task>  = this.observerEdit.asObservable();
+  subscriberUID$: Observable<string>  = this.observerUID.asObservable();
 
   emitData(data: Task) {
     this.observer.next(data);
@@ -37,6 +39,10 @@ export class TaskService {
 
   emitEditData(data: Task){
     this.observerEdit.next(data)
+  }
+
+  emitUIDData(uid: string){
+    this.observerUID.next(uid)
   }
 
   addTask(task: Task): Observable<Task>{
@@ -52,10 +58,9 @@ export class TaskService {
     return this.http.put<Task>(`${this.serviceURL}/${task.id}`, task)
   }
 
-  // createNewUser(uid: string){
-  //   const newUser = new DataUser(uid)
-  //   return this.http.post<Data>(this.serviceURL, newUser)
-  // }
+  createNewUser(uid: string){
+    this.emitUIDData(uid)
+  }
 
   constructor(private http: HttpClient) {
     this.serviceURL = "http://localhost:3000/tasks"

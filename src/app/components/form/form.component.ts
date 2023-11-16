@@ -12,6 +12,7 @@ import {TaskService} from "../../shared/services/task.service";
 export class FormComponent implements OnInit{
 
   task!: Task
+  uid!: string
   form!: FormGroup
   priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
 
@@ -26,6 +27,9 @@ export class FormComponent implements OnInit{
       deadline: new FormControl(this.priority, Validators.required),
       priority: new FormControl("", Validators.required),
     })
+    this.taskService.subscriberUID$.subscribe(next => {
+      this.uid = next
+    })
   }
 
   addTask(task: Task){
@@ -35,8 +39,7 @@ export class FormComponent implements OnInit{
   submit(){
     const {} = this.task = this.form.value
     this.task.status = false
-    this.task.uid = this.taskService.uid
-
+    this.task.uid = this.taskService.uid = undefined ? this.uid : this.taskService.uid
     this.taskService.emitData(this.task)
     this.addTask(this.task)
     this.form.reset()
