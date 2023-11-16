@@ -1,14 +1,14 @@
 {
   "tasks": [
     {
-      "uid": "mGvG57ssiTZupVp92nyyucNFHx22",
-      "name": "sdf",
+      "name": "gggg",
       "description": "dfgdfg",
       "category": "dfg",
       "deadline": "01.01.2000",
       "priority": {
         "name": "Срочно"
       },
+      "uid": "mGvG57ssiTZupVp92nyyucNFHx22",
       "id": 0,
       "status": false
     },
@@ -60,16 +60,16 @@
       "status": false
     },
     {
-      "name": "sdf",
+      "name": "qwerty2",
       "description": "ggdfg",
       "category": "hfgf",
       "deadline": "07.11.2023",
       "priority": {
         "name": "Срочно"
       },
-      "status": false,
       "uid": "mGvG57ssiTZupVp92nyyucNFHx22",
-      "id": 2
+      "id": 2,
+      "status": false
     }
   ]
 }
