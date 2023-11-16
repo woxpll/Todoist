@@ -1,73 +1,63 @@
 {
-  "users": [
+  "tasks": [
     {
-      "id": "mGvG57ssiTZupVp92nyyucNFHx22",
-      "tasks": [
-        {
-          "name": "sdf",
-          "description": "dfgdfg",
-          "category": "dfg",
-          "deadline": "01.01.2000",
-          "priority": {
-            "name": "Срочно"
-          },
-          "id": 0,
-          "status": false
-        },
-        {
-          "name": "wer",
-          "description": "wer",
-          "category": "ter",
-          "deadline": "21.11.2023",
-          "priority": {
-            "name": "Срочно"
-          },
-          "status": false,
-          "id": 1
-        }
-      ]
+      "uid": "mGvG57ssiTZupVp92nyyucNFHx22",
+      "name": "sdf",
+      "description": "dfgdfg",
+      "category": "dfg",
+      "deadline": "01.01.2000",
+      "priority": {
+        "name": "Срочно"
+      },
+      "id": 0,
+      "status": false
     },
     {
-      "id": "NooTsiBHMrMkCRABHa2InKBl3tk2",
-      "tasks": [
-        {
-          "name": "sdf",
-          "description": "dfgdfg",
-          "category": "dfg",
-          "deadline": "01.01.2000",
-          "priority": {
-            "name": "Срочно"
-          },
-          "id": 0,
-          "status": false
-        },
-        {
-          "name": "wer",
-          "description": "wer",
-          "category": "ter",
-          "deadline": "21.11.2023",
-          "priority": {
-            "name": "Срочно"
-          },
-          "status": false,
-          "id": 1
-        }
-      ]
+      "uid": "mGvG57ssiTZupVp92nyyucNFHx22",
+      "name": "wer",
+      "description": "wer",
+      "category": "ter",
+      "deadline": "21.11.2023",
+      "priority": {
+        "name": "Срочно"
+      },
+      "status": false,
+      "id": 1
     },
     {
-      "id": "RWV9UwEd0lca6ySJ6PUJGSWibN83",
-      "tasks": [
-        {
-          "name": "",
-          "description": "",
-          "category": "",
-          "deadline": "",
-          "priority": {
-            "name": ""
-          },
-          "status": false
-        }
-      ]
+      "uid": "NooTsiBHMrMkCRABHa2InKBl3tk2",
+      "name": "sdf",
+      "description": "dfgdfg",
+      "category": "dfg",
+      "deadline": "01.01.2000",
+      "priority": {
+        "name": "Срочно"
+      },
+      "id": 0,
+      "status": false
+    },
+    {
+      "uid": "NooTsiBHMrMkCRABHa2InKBl3tk2",
+      "name": "wer",
+      "description": "wer",
+      "category": "ter",
+      "deadline": "21.11.2023",
+      "priority": {
+        "name": "Срочно"
+      },
+      "status": false,
+      "id": 1
+    },
+    {
+      "uid": "RWV9UwEd0lca6ySJ6PUJGSWibN83",
+      "name": "",
+      "description": "",
+      "category": "",
+      "deadline": "",
+      "priority": {
+        "name": ""
+      },
+      "status": false
     }
   ]
 }

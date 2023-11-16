@@ -1,27 +1,26 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Task} from "../interfaces/task";
-import {Observable, pipe, Subject} from "rxjs";
-import {Data} from "../interfaces/data";
-import {DataUser} from "../classes/dataUser";
+import {Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  dataStorage?: Data
+  dataStorage : any
 
   serviceURL: string
   uid$: any = localStorage.getItem("user")
+  uid = JSON.parse(this.uid$).uid
 
   check(){
-    const uid = JSON.parse(this.uid$).uid
-    this.http.get<Data>(`${this.serviceURL}/${uid}`).subscribe( (data) =>{
+    this.http.get(`${this.serviceURL}/?uid=${this.uid}`).subscribe( (data) =>{
         this.dataStorage = data
+        console.log(data)
       },
       error => {
-        this.createNewUser(uid).subscribe()
+        // this.createNewUser(uid).subscribe()
       }
     )
   }
@@ -44,7 +43,7 @@ export class TaskService {
     return this.http.post<Task>(this.serviceURL, task)
   }
   getAllTask(): Observable<Task[]>{
-    return this.http.get<Task[]>(this.serviceURL)
+    return this.http.get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`)
   }
   deleteTask(task: Task): Observable<Task>{
     return this.http.delete<Task>(`${this.serviceURL}/${task.id}`)
@@ -53,13 +52,13 @@ export class TaskService {
     return this.http.put<Task>(`${this.serviceURL}/${task.id}`, task)
   }
 
-  createNewUser(uid: string){
-    const newUser = new DataUser(uid)
-    return this.http.post<Data>(this.serviceURL, newUser)
-  }
+  // createNewUser(uid: string){
+  //   const newUser = new DataUser(uid)
+  //   return this.http.post<Data>(this.serviceURL, newUser)
+  // }
 
   constructor(private http: HttpClient) {
-    this.serviceURL = "http://localhost:3000/users"
+    this.serviceURL = "http://localhost:3000/tasks"
   }
 
 
