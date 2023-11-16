@@ -60,6 +60,4 @@ export class TaskService {
   constructor(private http: HttpClient) {
     this.serviceURL = "http://localhost:3000/tasks"
   }
-
-
 }

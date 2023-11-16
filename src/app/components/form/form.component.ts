@@ -33,12 +33,12 @@ export class FormComponent implements OnInit{
   }
 
   submit(){
-    const {name, description, category, deadline, priority, status = false} = this.task = this.form.value
+    const {} = this.task = this.form.value
     this.task.status = false
+    this.task.uid = this.taskService.uid
 
     this.taskService.emitData(this.task)
-
-    // this.addTask(this.task)
+    this.addTask(this.task)
     this.form.reset()
   }
 
