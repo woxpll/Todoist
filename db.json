@@ -1,18 +1,6 @@
 {
   "tasks": [
     {
-      "name": "gggg",
-      "description": "dfgdfg",
-      "category": "dfg",
-      "deadline": "01.01.2000",
-      "priority": {
-        "name": "Срочно"
-      },
-      "uid": "mGvG57ssiTZupVp92nyyucNFHx22",
-      "id": 0,
-      "status": false
-    },
-    {
       "uid": "mGvG57ssiTZupVp92nyyucNFHx22",
       "name": "wer",
       "description": "wer",

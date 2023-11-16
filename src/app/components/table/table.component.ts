@@ -62,8 +62,6 @@ export class TableComponent implements OnInit{
   deleteTask(task: Task){
     const index = this.tasks.findIndex(n => n.id === task.id)
     delete this.tasks[index]
-    // this.taskService.deleteTask(task).subscribe(next=> {
-    //
-    // })
+    this.taskService.deleteTask(task).subscribe()
   }
 }
