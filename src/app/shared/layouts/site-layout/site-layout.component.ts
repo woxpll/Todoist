@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-site-layout',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class SiteLayoutComponent {
 
+  constructor(private authService: AuthService) { }
+
+  onLogout(){
+    this.authService.loggut().then()
+  }
 }
