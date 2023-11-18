@@ -3,9 +3,10 @@
   [formGroup]="form"
   (ngSubmit)="onSubmit()"
 >
-  <p-card header="Войти в систему">
-    <div class="">
-      <div>
+  <div class="card flex justify-content-center">
+    <p-card header="Войти в систему" [style]="{ width: '360px' }">
+      <div class="">
+        <div class="field">
         <span class="p-float-label">
           <input
             formControlName="email"
@@ -16,16 +17,16 @@
           />
           <label htmlFor="email">Email</label>
         </span>
-      </div>
-      <span
-        class="helper-text red-text"
-        *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
-      >
+        </div>
+        <span
+          class="helper-text red-text"
+          *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+        >
           <span *ngIf="form.get('email')?.errors?.['required']">Email не должен быть пустым</span>
           <span *ngIf="form.get('email')?.errors?.['email']">Введите корректеный email</span>
       </span>
 
-      <div>
+        <div class="field">
         <span class="p-float-label">
           <p-password
             class="p-inputtext-lg"
@@ -37,23 +38,25 @@
           ></p-password>
           <label for="password">Password</label>
         </span>
-        <span
-          class="helper-text red-text"
-          *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
-        >
+          <span
+            class="helper-text red-text"
+            *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+          >
           <span *ngIf="form.get('password')?.errors?.['required']">Пароль не должен быть пустым</span>
           <span *ngIf="form.get('password')?.errors?.['minlength'] && form.get('password')?.errors?.['minlength']['requiredLength']">
             Пароль должен быть больше 6 символов
           </span>
         </span>
+        </div>
       </div>
-    </div>
-    <div class="card flex justify-content-center">
-      <p-button
-        type="submit"
-        [disabled]="form.invalid || form.disabled"
-        label="Submit"
-      ></p-button>
-    </div>
-  </p-card>
+      <div class="card flex justify-content-center">
+        <p-button
+          type="submit"
+          [disabled]="form.invalid || form.disabled"
+          label="Submit"
+        ></p-button>
+      </div>
+    </p-card>
+
+  </div>
 </form>
