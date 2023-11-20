@@ -32,6 +32,7 @@ import {AngularFireModule} from "@angular/fire/compat";
 import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
+import {RippleModule} from "primeng/ripple";
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.com
     CalendarModule,
     DropdownModule,
     DialogModule,
+    RippleModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
