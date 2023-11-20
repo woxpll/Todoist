@@ -24,9 +24,9 @@
         class="helper-text red-text"
         *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
       >
-      <span *ngIf="form.get('email')?.errors?.['required']">Email не должен быть пустым</span>
-      <span *ngIf="form.get('email')?.errors?.['email']">Введите корректеный email</span>
-    </span>
+        <span *ngIf="form.get('email')?.errors?.['required']">Email не должен быть пустым</span>
+        <span *ngIf="form.get('email')?.errors?.['email']">Введите корректеный email</span>
+      </span>
 
       <label for="password1" class="block text-900 font-medium mb-2">Password</label>
       <p-password
