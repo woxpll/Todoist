@@ -1,16 +1,23 @@
 <mat-toolbar color="primary">
   <a class="name-brand" routerLink="/">Todoist</a>
   <span class="example-spacer"></span>
-  <ul id="nav-mobile" class="right hide-on-med-and-down">
-    <li routerLinkActive="active">
-      <a routerLink="login">Вход</a>
-    </li>
-    <li routerLinkActive="active">
-      <a routerLink="register">Регистрация</a>
-    </li>
-  </ul>
+  <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
+    <p-button
+      label="Login"
+      [outlined]="true"
+      routerLinkActive="active"
+      routerLink="login"
+    ></p-button>
+    <p-button
+      label="Register"
+      [outlined]="true"
+      class="ml-3"
+      routerLinkActive="active"
+      routerLink="register"
+    ></p-button>
+  </div>
 </mat-toolbar>
 
-<div class="">
+<div class="m-auto">
   <router-outlet></router-outlet>
 </div>
