@@ -1,63 +1,65 @@
-<form
-  class="p-card"
-  [formGroup]="form"
-  (ngSubmit)="onSubmit()"
->
-  <div class="card flex justify-content-center">
-    <p-card header="Создать аккаунт" [style]="{ width: '360px' }">
-      <div class="">
-        <div class="field">
-          <span class="p-float-label">
-            <input
-              formControlName="email"
-              class="p-inputtext-lg"
-              pInputText
-              id="email"
-              [ngClass]="{'ng-invalid ng-dirty': form.get('email')?.invalid && form.get('email')?.touched}"
-            />
-            <label htmlFor="email">Email</label>
-          </span>
-        </div>
-        <span
-          class="helper-text red-text"
-          *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
-        >
-          <span *ngIf="form.get('email')?.errors?.['required']">Email не должен быть пустым</span>
-          <span *ngIf="form.get('email')?.errors?.['email']">Введите корректеный email</span>
+<div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="text-center mb-5">
+      <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
+      <span class="text-600 font-medium line-height-3">Have already an account?</span>
+      <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Log in!</a>
+    </div>
+
+    <div>
+      <label for="email1" class="block text-900 font-medium mb-2">Email</label>
+      <input
+        formControlName="email"
+        class="w-full mb-3"
+        placeholder="Email address"
+        pInputText
+        id="email1"
+        [ngClass]="{'ng-invalid ng-dirty': form.get('email')?.invalid && form.get('email')?.touched}"
+      />
+
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+      >
+        <span *ngIf="form.get('email')?.errors?.['required']">Email не должен быть пустым</span>
+        <span *ngIf="form.get('email')?.errors?.['email']">Введите корректеный email</span>
+      </span>
+
+      <label for="password1" class="block text-900 font-medium mb-2">Password</label>
+      <p-password
+        class="w-full mb-3 block"
+        placeholder="Password"
+        [style]="{'width':'100%'}"
+        [inputStyle]="{'width':'100%'}"
+        [toggleMask]="true"
+        [feedback]="false"
+        formControlName="password"
+        id="password1"
+        [ngClass]="{'ng-invalid ng-dirty': form.get('password')?.invalid && form.get('password')?.touched}"
+      ></p-password>
+
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+      >
+        <span *ngIf="form.get('password')?.errors?.['required']">Пароль не должен быть пустым</span>
+        <span *ngIf="form.get('password')?.errors?.['minlength'] && form.get('password')?.errors?.['minlength']['requiredLength']">
+          Пароль должен быть больше 6 символов
         </span>
+      </span>
 
-        <div class="field">
-          <span class="p-float-label">
-            <p-password
-              class="p-inputtext-lg"
-              [toggleMask]="true"
-              [feedback]="false"
-              formControlName="password"
-              id="password"
-              [ngClass]="{'ng-invalid ng-dirty': form.get('password')?.invalid && form.get('password')?.touched}"
-            ></p-password>
-            <label for="password">Password</label>
-          </span>
-          <span
-            class="helper-text red-text"
-            *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
-          >
-          <span *ngIf="form.get('password')?.errors?.['required']">Пароль не должен быть пустым</span>
-          <span *ngIf="form.get('password')?.errors?.['minlength'] && form.get('password')?.errors?.['minlength']['requiredLength']">
-            Пароль должен быть больше 6 символов
-          </span>
-        </span>
-        </div>
-      </div>
-
-      <div class="card flex justify-content-center">
-        <p-button
-          type="submit"
-          [disabled]="form.invalid || form.disabled"
-          label="Создать"
-        ></p-button>
-      </div>
-    </p-card>
-  </div>
-
-</form>
+      <button
+        pButton
+        pRipple
+        label="Sign In"
+        icon="pi pi-user"
+        class="w-full"
+        [disabled]="form.invalid || form.disabled"
+        type="submit"
+      ></button>
+    </div>
+  </form>
+</div>
