@@ -7,19 +7,62 @@
       <div class="col-5">
         <div class="field">
           <label for="name">Название задачи</label>
-          <input class="w-full" id="name" type="text" pInputText formControlName="name"/>
+          <input
+            aria-describedby="name-help"
+            class="w-full"
+            id="name"
+            type="text"
+            pInputText
+            formControlName="name"
+            [ngClass]="{'ng-invalid ng-dirty': form.get('name')?.invalid && form.get('name')?.touched}"
+          />
+          <small
+            id="name-help"
+            class="p-error"
+            *ngIf="form.get('name')?.invalid && form.get('name')?.touched"
+          >
+            <small *ngIf="form.get('name')?.errors?.['required']">Обязательное поле</small>
+          </small>
         </div>
       </div>
       <div class="col-5">
         <div class="field">
           <label for="description">Описание задачи</label>
-          <input class="w-full" id="description" type="text" pInputText formControlName="description"/>
+          <input
+            aria-describedby="description-help"
+            class="w-full" id="description"
+            type="text"
+            pInputText
+            formControlName="description"
+            [ngClass]="{'ng-invalid ng-dirty': form.get('description')?.invalid && form.get('description')?.touched}"
+          />
+          <small
+            id="description-help"
+            class="p-error"
+            *ngIf="form.get('description')?.invalid && form.get('description')?.touched"
+          >
+            <small *ngIf="form.get('description')?.errors?.['required']">Обязательное поле</small>
+          </small>
         </div>
       </div>
       <div class="col-5">
         <div class="field">
           <label for="category">Категория задачи</label>
-          <input class="w-full" id="category" type="text" pInputText formControlName="category"/>
+          <input
+            aria-describedby="category-help"
+            class="w-full" id="category"
+            type="text"
+            pInputText
+            formControlName="category"
+            [ngClass]="{'ng-invalid ng-dirty': form.get('category')?.invalid && form.get('category')?.touched}"
+          />
+          <small
+            id="category-help"
+            class="p-error"
+            *ngIf="form.get('category')?.invalid && form.get('category')?.touched"
+          >
+            <small *ngIf="form.get('category')?.errors?.['required']">Обязательное поле</small>
+          </small>
         </div>
       </div>
       <div class="col-5">
@@ -32,21 +75,39 @@
             [showIcon]="true"
             dataType="string"
             id="deadline"
+            aria-describedby="deadline-help"
+            [ngClass]="{'ng-invalid ng-dirty': form.get('deadline')?.invalid && form.get('deadline')?.touched}"
           ></p-calendar>
+          <small
+            id="deadline-help"
+            class="p-error"
+            *ngIf="form.get('deadline')?.invalid && form.get('deadline')?.touched"
+          >
+            <small *ngIf="form.get('deadline')?.errors?.['required']">Обязательное поле</small>
+          </small>
         </div>
       </div>
       <div class="col-5">
         <div class="field">
           <label for="priority">Приоритет задачи</label>
           <p-dropdown
-            class="w-full"
+            [style]="{'width':'100%'}"
             formControlName="priority"
             [options]="priority"
             [showClear]="true"
             optionLabel="name"
             placeholder="Выбрать приоритет"
             id="priority"
+            aria-describedby="priority-help"
+            [ngClass]="{'ng-invalid ng-dirty': form.get('priority')?.invalid && form.get('priority')?.touched}"
           ></p-dropdown>
+          <small
+            id="priority-help"
+            class="p-error"
+            *ngIf="form.get('priority')?.invalid && form.get('priority')?.touched"
+          >
+            <small *ngIf="form.get('priority')?.errors?.['required']">Обязательное поле</small>
+          </small>
         </div>
       </div>
     </div>
