@@ -1,28 +1,28 @@
-<div class="surface-card p-4 shadow-2 border-round w-full my-4 m-auto lg:w-6">
+<div class="surface-card p-4 shadow-2 border-round w-full my-4 m-auto lg:w-5">
   <form
     [formGroup]="form"
     (ngSubmit)="submit()"
   >
-    <div class="grid">
-      <div class="col-6">
+    <div class="grid justify-content-between">
+      <div class="col-5">
         <div class="field">
           <label for="name">Название задачи</label>
           <input id="name" type="text" pInputText formControlName="name"/>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-5">
         <div class="field">
           <label for="description">Описание задачи</label>
           <input id="description" type="text" pInputText formControlName="description"/>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-5">
         <div class="field">
           <label for="category">Категория задачи</label>
           <input id="category" type="text" pInputText formControlName="category"/>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-5">
         <div class="field">
           <label for="deadline">Срок задачи</label>
           <p-calendar
@@ -34,7 +34,7 @@
           ></p-calendar>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-5">
         <div class="field">
           <label for="priority">Приоритет задачи</label>
           <p-dropdown
