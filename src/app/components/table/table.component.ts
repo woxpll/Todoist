@@ -32,6 +32,7 @@ export class TableComponent implements OnInit{
   getAllTask(){
     this.taskService.getAllTask().subscribe(next => {
       this.tasks = next
+      this.taskService.getAllTaskToLocalStorage(this.tasks)
     },error => {
       alert(error)
     })

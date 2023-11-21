@@ -8,10 +8,6 @@ import {Observable, of, Subject} from "rxjs";
 })
 export class TaskService {
 
-  dataStorage : any
-
-  isExists!: boolean
-
   serviceURL: string
   uid$: any = localStorage.getItem("user")
   uid = JSON.parse(this.uid$).uid
@@ -43,6 +39,10 @@ export class TaskService {
 
   emitUIDData(uid: string){
     this.observerUID.next(uid)
+  }
+
+  getAllTaskToLocalStorage(tasks: Task[]){
+    localStorage.setItem("task", JSON.stringify(tasks))
   }
 
   addTask(task: Task): Observable<Task>{
