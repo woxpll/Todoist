@@ -10,14 +10,14 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-task>
-    <tr>
+    <tr [ngClass]="{'done' : task.status === true}">
       <td>{{task.name}}</td>
       <td>{{task.description}}</td>
       <td>{{task.category}}</td>
       <td>{{task.deadline}}</td>
       <td>{{task.priority.name}}</td>
       <td>{{task.status}}
-        <p-button icon="pi pi-check"></p-button>
+        <p-button (onClick)="doneTask(task)" icon="pi pi-check"></p-button>
         <app-modal-dialog [task]="task"></app-modal-dialog>
         <p-button icon="pi pi-times" (click)="deleteTask(task)" severity="danger"></p-button>
       </td>

@@ -64,4 +64,9 @@ export class TableComponent implements OnInit{
     delete this.tasks[index]
     this.taskService.deleteTask(task).subscribe()
   }
+
+  doneTask(task: Task){
+    this.task = task
+    this.task.status = !this.task.status
+  }
 }
