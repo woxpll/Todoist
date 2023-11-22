@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit, OnDestroy{
       if(params["registered"]){
         // Теперь вы можете зайти
       } else if(params["accessDenied"]){
-      //   Для начала надо авторизоваться
+        alert("Для начала надо авторизироваться")
       }
     })
 

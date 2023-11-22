@@ -43,7 +43,7 @@ export class AuthService {
     return user !== null
   }
 
-  loggut() {
+  logout() {
     return this.firebaseAuthenticationService.signOut().then(() => {
       localStorage.removeItem("task")
       localStorage.removeItem('user');
