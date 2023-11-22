@@ -4,7 +4,8 @@ import {LoginPageComponent} from "./components/login-page/login-page.component";
 import {AuthLayoutComponent} from "./shared/layouts/auth-layout/auth-layout.component";
 import {SiteLayoutComponent} from "./shared/layouts/site-layout/site-layout.component";
 import {RegisterPageComponent} from "./components/register-page/register-page.component";
-import {AuthGuard} from "@angular/fire/auth-guard";
+import {authGuard} from "./shared/classes/auth.guard";
+
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: "dashboard",
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
     component: SiteLayoutComponent
   }
 ];
