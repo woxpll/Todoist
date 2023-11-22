@@ -27,7 +27,7 @@ export class LoginPageComponent implements OnInit, OnDestroy{
 
     this.route.queryParams.subscribe((params: Params) => {
       if(params["registered"]){
-        // Теперь вы можете зайти
+        alert("Теперь вы можете зайти")
       } else if(params["accessDenied"]){
         alert("Для начала надо авторизироваться")
       }
@@ -51,6 +51,7 @@ export class LoginPageComponent implements OnInit, OnDestroy{
       this.form.enable()
       this.form.reset()
     }).catch((error) => {
+      console.warn(error)
     })
 
   }

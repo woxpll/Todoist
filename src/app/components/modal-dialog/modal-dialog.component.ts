@@ -35,6 +35,7 @@ export class ModalDialogComponent implements OnInit{
     const status = this.task.status
     const id = this.task.id
     const {} = this.task = this.formEdit.value
+    console.log(this.task)
     this.task.uid = this.taskService.uid
     this.task.id = id
     this.task.status = status

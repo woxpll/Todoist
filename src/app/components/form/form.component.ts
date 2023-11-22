@@ -21,11 +21,11 @@ export class FormComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = new FormGroup<any>({
-      name: new FormControl("", Validators.required),
-      description: new FormControl("", Validators.required),
-      category: new FormControl("", Validators.required),
+      name: new FormControl(null, Validators.required),
+      description: new FormControl(null, Validators.required),
+      category: new FormControl(null, Validators.required),
       deadline: new FormControl(this.priority, Validators.required),
-      priority: new FormControl("", Validators.required),
+      priority: new FormControl(null, Validators.required),
     })
     this.taskService.subscriberUID$.subscribe(next => {
       this.uid = next
