@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 
@@ -38,14 +38,14 @@ export class AuthService {
         alert(error.message);
       })
   }
-
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null;
+    return user !== null
   }
 
   loggut() {
     return this.firebaseAuthenticationService.signOut().then(() => {
+      localStorage.removeItem("task")
       localStorage.removeItem('user');
       this.router.navigate(['login']);
     })
