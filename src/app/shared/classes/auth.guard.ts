@@ -5,7 +5,7 @@ import {AuthService} from "../services/auth.service";
 export const authGuard: CanActivateFn = () => {
     return inject(AuthService).isLoggedIn ? true : inject(Router).navigate(["login"], {
     queryParams: {
-        // accessDenied: true
+        accessDenied: true
     }
   })
 }
