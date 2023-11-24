@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Priority} from "../../shared/interfaces/priority";
 import {Task} from "../../shared/interfaces/task";
 import {TaskService} from "../../shared/services/task.service";
+import {ITaskForm} from "../../shared/interfaces/itask-form";
 
 @Component({
   selector: 'app-modal-dialog',
@@ -22,7 +23,7 @@ export class ModalDialogComponent implements OnInit{
   constructor(private taskService: TaskService) {
   }
   ngOnInit(): void {
-    this.formEdit = new FormGroup<any>({
+    this.formEdit = new FormGroup<ITaskForm>({
       name: new FormControl(this.task.name, Validators.required),
       description: new FormControl(this.task.description, Validators.required),
       category: new FormControl(this.task.category, Validators.required),

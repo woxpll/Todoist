@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Priority} from "../../shared/interfaces/priority";
 import {Task} from "../../shared/interfaces/task";
 import {TaskService} from "../../shared/services/task.service";
+import {ITaskForm} from "../../shared/interfaces/itask-form";
 
 @Component({
   selector: 'app-form',
@@ -20,12 +21,12 @@ export class FormComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.form = new FormGroup<any>({
+    this.form = new FormGroup<ITaskForm>({
       name: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
       category: new FormControl(null, Validators.required),
-      deadline: new FormControl(this.priority, Validators.required),
-      priority: new FormControl(null, Validators.required),
+      deadline: new FormControl(null, Validators.required),
+      priority: new FormControl(this.priority, Validators.required),
     })
     this.taskService.subscriberUID$.subscribe(next => {
       this.uid = next
