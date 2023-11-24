@@ -24,6 +24,11 @@ export class AuthService {
     return this.firebaseAuthenticationService.signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         this.userData = userCredential.user
+        this.firebaseAuthenticationService.authState.subscribe((user) => {
+          if (user){
+            this.router.navigate(['dashboard'])
+          }
+        })
       })
       .catch((error) => {
         alert(error.message);
