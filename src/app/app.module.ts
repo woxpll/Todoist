@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import {AuthService} from "./shared/services/auth.service";
+
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
@@ -32,6 +34,7 @@ import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { RippleModule } from 'primeng/ripple';
+
 
 @NgModule({
   declarations: [
@@ -69,7 +72,7 @@ import { RippleModule } from 'primeng/ripple';
     // error
     AngularFireModule.initializeApp(environment.firebase),
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

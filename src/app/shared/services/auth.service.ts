@@ -3,9 +3,7 @@ import { Router } from '@angular/router';
 import { User } from '../interfaces/user';
 import { v4 as uuidv4 } from 'uuid';
 
-@Injectable({
-  providedIn: 'root', //TODO: если сервис в shared, он не должен быть providedIn: 'root'. Это side effect о котором я не узнаю пока сюда не зайду. Декларируй его в провайдерах app.module явно
-})
+@Injectable()
 export class AuthService {
 
 
