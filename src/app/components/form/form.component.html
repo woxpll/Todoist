@@ -6,6 +6,7 @@
     <div class="grid justify-content-between">
       <div class="col-5">
         <div class="field">
+          <!-- TODO: строковые константы в файл. В ангуляре есть механизм интернационализации для шаблонов, лучше туда. -->
           <label for="name">Название задачи</label>
           <input
             aria-describedby="name-help"
@@ -30,7 +31,8 @@
           <label for="description">Описание задачи</label>
           <input
             aria-describedby="description-help"
-            class="w-full" id="description"
+            class="w-full"
+            id="description"
             type="text"
             pInputText
             formControlName="description"
@@ -50,7 +52,8 @@
           <label for="category">Категория задачи</label>
           <input
             aria-describedby="category-help"
-            class="w-full" id="category"
+            class="w-full"
+            id="category"
             type="text"
             pInputText
             formControlName="category"
