@@ -4,8 +4,7 @@ import { User } from '../interfaces/user';
 import { v4 as uuidv4 } from 'uuid';
 import {LocalStorage} from "../enums/local-storage";
 import {Redirection} from "../enums/redirection";
-import {Observable, of, throwError} from "rxjs";
-import {errorContext} from "rxjs/internal/util/errorContext";
+import {Observable, of} from "rxjs";
 
 @Injectable()
 export class AuthService {
