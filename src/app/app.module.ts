@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import {AuthService} from "./shared/services/auth.service";
+import {TaskService} from "./shared/services/task.service";
 
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
@@ -23,17 +24,10 @@ import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
-
-import { provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environmen';
-import firebase from 'firebase/compat/app';
-import initializeApp = firebase.initializeApp; //TODO: никакого firebase, нужно переделать на LocalStorage
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { AngularFireModule } from '@angular/fire/compat';
 import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
-import { RippleModule } from 'primeng/ripple';
+import { RippleModule } from 'primeng/ripple'
 
 
 @NgModule({
@@ -65,14 +59,11 @@ import { RippleModule } from 'primeng/ripple';
     DropdownModule,
     DialogModule,
     RippleModule,
-
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-
-    // error
-    AngularFireModule.initializeApp(environment.firebase),
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    TaskService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

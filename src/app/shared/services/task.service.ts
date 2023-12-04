@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Task } from '../interfaces/task';
 import { Observable, Subject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TaskService {
   serviceURL: string;
   uid$: any = localStorage.getItem('user');

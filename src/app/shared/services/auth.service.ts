@@ -24,6 +24,7 @@ export class AuthService {
   login(user: User): Observable<boolean>{
     const userData: User | undefined = this.users.find(value => value.email === user.email)
     if(userData?.password === user.password){
+      localStorage.setItem("uid", userData.id)
       return of(true)
     }else {
       return of(false)
