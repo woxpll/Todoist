@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../interfaces/user';
 import { v4 as uuidv4 } from 'uuid';
+import {LocalStorage} from "../enums/local-storage";
+import {Redirection} from "../enums/redirection";
 
 @Injectable()
 export class AuthService {
-
 
   users!: User[]
   constructor(
@@ -13,8 +14,8 @@ export class AuthService {
   ) {
     this.users =[]
 
-    if (localStorage.getItem("user")){
-      this.users = JSON.parse(localStorage.getItem("user")!)
+    if (localStorage.getItem(LocalStorage.USERS)){
+      this.users = JSON.parse(localStorage.getItem(LocalStorage.USERS)!)
       console.log(this.users)
     }
   }
@@ -29,17 +30,17 @@ export class AuthService {
   register(user: User){
     user.id = uuidv4()
     this.users.push(user)
-    localStorage.setItem("user", JSON.stringify(this.users))
+    localStorage.setItem(LocalStorage.USERS, JSON.stringify(this.users))
   }
 
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!); // TODO: никаких non-null assertion, ошибки проверки типов твои друзья, а не враги. Используй type guard механизм.
+    const user = JSON.parse(localStorage.getItem(LocalStorage.USERS)!); // TODO: никаких non-null assertion, ошибки проверки типов твои друзья, а не враги. Используй type guard механизм.
     return user !== null;
   }
 
   logout() {
-    localStorage.removeItem('task'); //TODO: текстовые константы выноси в отдельных файл, тогда сможешь менять их в одном месте в проекте и уменьшить количество ошибок из-за переименований
-    localStorage.removeItem('user');
-    this.router.navigate(['login']);
+    localStorage.removeItem(LocalStorage.TASKS);
+    localStorage.removeItem(LocalStorage.USERS);
+    this.router.navigate([Redirection.LOGIN]);
   }
 }

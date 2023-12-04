@@ -6,8 +6,7 @@
     <div class="grid justify-content-between">
       <div class="col-5">
         <div class="field">
-          <!-- TODO: строковые константы в файл. В ангуляре есть механизм интернационализации для шаблонов, лучше туда. -->
-          <label for="name">Название задачи</label>
+          <label for="name">{{ TasksEnum.NAME_TASK }}</label>
           <input
             aria-describedby="name-help"
             class="w-full"
@@ -28,7 +27,7 @@
       </div>
       <div class="col-5">
         <div class="field">
-          <label for="description">Описание задачи</label>
+          <label for="description">{{ TasksEnum.DESCRIPTION_TASK }}</label>
           <input
             aria-describedby="description-help"
             class="w-full"
@@ -49,7 +48,7 @@
       </div>
       <div class="col-5">
         <div class="field">
-          <label for="category">Категория задачи</label>
+          <label for="category">{{ TasksEnum.CATEGORY_TASK }}</label>
           <input
             aria-describedby="category-help"
             class="w-full"
@@ -70,7 +69,7 @@
       </div>
       <div class="col-5">
         <div class="field">
-          <label for="deadline">Срок задачи</label>
+          <label for="deadline">{{ TasksEnum.CATEGORY_TASK }}</label>
           <p-calendar
             class="w-full"
             dateFormat="dd.mm.yy"
@@ -92,7 +91,7 @@
       </div>
       <div class="col-5">
         <div class="field">
-          <label for="priority">Приоритет задачи</label>
+          <label for="priority">{{ TasksEnum.PRIORITY_TASK }}</label>
           <p-dropdown
             [style]="{'width':'100%'}"
             formControlName="priority"

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Task} from "../../shared/interfaces/task";
 import {TaskService} from "../../shared/services/task.service";
+import {TasksEnum} from "../../shared/enums/tasks-enum";
 
 @Component({
   selector: 'app-table',
@@ -8,6 +9,8 @@ import {TaskService} from "../../shared/services/task.service";
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit{
+
+  protected readonly TasksEnum = TasksEnum;
 
   task!: Task
   tasks!: Task[]

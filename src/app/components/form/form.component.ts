@@ -4,6 +4,7 @@ import {Priority} from "../../shared/interfaces/priority";
 import {Task} from "../../shared/interfaces/task";
 import {TaskService} from "../../shared/services/task.service";
 import {ITaskForm} from "../../shared/interfaces/itask-form";
+import {TasksEnum} from "../../shared/enums/tasks-enum";
 
 @Component({
   selector: 'app-form',
@@ -11,6 +12,8 @@ import {ITaskForm} from "../../shared/interfaces/itask-form";
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit{
+
+  protected readonly TasksEnum = TasksEnum;
 
   task!: Task
   uid!: string
@@ -45,5 +48,4 @@ export class FormComponent implements OnInit{
     this.addTask(this.task)
     this.form.reset()
   }
-
 }
