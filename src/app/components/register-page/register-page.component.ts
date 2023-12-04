@@ -34,17 +34,17 @@ export class RegisterPageComponent implements OnInit, OnDestroy{
 
   onSubmit(){
     this.form.disable()
-
-    this.auth.signUpWithEmailAndPassword(this.form.value.email, this.form.value.password).then(() => {
-      this.router.navigate(["/login"], {
-        queryParams: {
-          registered: true
-        }
-      })
-      console.log("Success")
-    }).catch((error) => {
-      console.warn(error)
-      this.form.enable()
-    })
+    this.auth.register(this.form.value)
+  //   this.auth.signUpWithEmailAndPassword(this.form.value.email, this.form.value.password).then(() => {
+  //     this.router.navigate(["/login"], {
+  //       queryParams: {
+  //         registered: true
+  //       }
+  //     })
+  //     console.log("Success")
+  //   }).catch((error) => {
+  //     console.warn(error)
+  //     this.form.enable()
+  //   })
   }
 }
