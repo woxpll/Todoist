@@ -4,7 +4,7 @@ import {LoginPageComponent} from "./components/login-page/login-page.component";
 import {AuthLayoutComponent} from "./shared/layouts/auth-layout/auth-layout.component";
 import {SiteLayoutComponent} from "./shared/layouts/site-layout/site-layout.component";
 import {RegisterPageComponent} from "./components/register-page/register-page.component";
-import {authGuard} from "./shared/classes/auth.guard";
+import {authGuard} from "./shared/guard/auth.guard";
 
 
 const routes: Routes = [

@@ -4,7 +4,7 @@ import {AuthService} from "../../shared/services/auth.service";
 import {Subscription} from "rxjs";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ISignForm} from "../../shared/interfaces/isign-form";
-
+import {Redirection} from "../../shared/enums/redirection";
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -46,13 +46,16 @@ export class LoginPageComponent implements OnInit, OnDestroy{
 
   onSubmit(){
     this.form.disable()
-    this.auth.login(this.form.value)
-    // this.auth.logInWithEmailAndPassword(this.form.value.email, this.form.value.password).then(() => {
-    //   this.form.enable()
-    //   this.form.reset()
-    // }).catch((error) => {
-    //   console.warn(error)
-    // })
-
+    this.aSub = this.auth.login(this.form.value).subscribe(
+      value => {
+        if (value){
+          this.router.navigate([Redirection.DASHBOARD])
+        }else {
+          console.log("Никак")
+          this.form.reset()
+          this.form.enable()
+        }
+      }
+    )
   }
 }

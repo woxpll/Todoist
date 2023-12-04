@@ -4,6 +4,7 @@ import {AuthService} from "../../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {ISignForm} from "../../shared/interfaces/isign-form";
+import {Redirection} from "../../shared/enums/redirection";
 
 @Component({
   selector: 'app-register-page',
@@ -34,17 +35,20 @@ export class RegisterPageComponent implements OnInit, OnDestroy{
 
   onSubmit(){
     this.form.disable()
-    this.auth.register(this.form.value)
-  //   this.auth.signUpWithEmailAndPassword(this.form.value.email, this.form.value.password).then(() => {
-  //     this.router.navigate(["/login"], {
-  //       queryParams: {
-  //         registered: true
-  //       }
-  //     })
-  //     console.log("Success")
-  //   }).catch((error) => {
-  //     console.warn(error)
-  //     this.form.enable()
-  //   })
+    this.aSub = this.auth.register(this.form.value).subscribe(
+      value => {
+        if (value){
+          this.router.navigate(["/login"],{
+            queryParams: {
+              registered: true
+            }
+          })
+        }else {
+          console.log("Пользаватель уже существует")
+          this.form.reset()
+          this.form.enable()
+        }
+      }
+    )
   }
 }

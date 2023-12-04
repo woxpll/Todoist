@@ -4,6 +4,8 @@ import { User } from '../interfaces/user';
 import { v4 as uuidv4 } from 'uuid';
 import {LocalStorage} from "../enums/local-storage";
 import {Redirection} from "../enums/redirection";
+import {Observable, of, throwError} from "rxjs";
+import {errorContext} from "rxjs/internal/util/errorContext";
 
 @Injectable()
 export class AuthService {
@@ -20,17 +22,26 @@ export class AuthService {
     }
   }
 
-  login(user: User){
-    const userData: User | undefined = this.users.find(value => value.email = user.email)
+  login(user: User): Observable<boolean>{
+    const userData: User | undefined = this.users.find(value => value.email === user.email)
     if(userData?.password === user.password){
-      console.log(1)
+      return of(true)
+    }else {
+      return of(false)
     }
   }
 
-  register(user: User){
-    user.id = uuidv4()
-    this.users.push(user)
-    localStorage.setItem(LocalStorage.USERS, JSON.stringify(this.users))
+  register(user: User): Observable<boolean>{
+    const userData: User | undefined = this.users.find(value => value.email === user.email)
+    console.log(userData)
+    if (userData === undefined){
+      user.id = uuidv4()
+      this.users.push(user)
+      localStorage.setItem(LocalStorage.USERS, JSON.stringify(this.users))
+      return of(true)
+    }else {
+      return of(false)
+    }
   }
 
   get isLoggedIn(): boolean {
