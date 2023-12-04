@@ -1,3 +1,9 @@
+Общие замечания:
+
+- не увидел использование модификаторов доступа для свойств и методов классов
+- [ngClass]="{'ng-invalid ng-dirty': form.get('name')?.invalid && form.get('name')?.touched}" такое делать не нужно, правильная работа с валидаторами формы и matInput закрывает все потребности
+- [style]="{'width':'100%'}", style="width:16.6%" никаких стилей в шаблонах, для этого специально используются scss файлы
+
 # Todolist
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.9.

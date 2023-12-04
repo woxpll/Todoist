@@ -1,68 +1,68 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Task} from "../interfaces/task";
-import {Observable, Subject} from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Task } from '../interfaces/task';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
-
-  serviceURL: string
-  uid$: any = localStorage.getItem("user")
-  uid = JSON.parse(this.uid$).uid
+  serviceURL: string;
+  uid$: any = localStorage.getItem('user');
+  uid = JSON.parse(this.uid$).uid;
 
   check() {
-    this.http.get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`).subscribe( (data) =>{
-        if (data.length === 0){
-          this.createNewUser(this.uid)
+    this.http
+      .get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`)
+      .subscribe((data) => {
+        if (data.length === 0) {
+          this.createNewUser(this.uid);
         }
-      }
-    )
+      });
   }
 
-  observer: Subject<Task> = new Subject()
-  observerEdit: Subject<Task> = new Subject()
-  observerUID: Subject<string> = new Subject()
+  observer: Subject<Task> = new Subject();
+  observerEdit: Subject<Task> = new Subject();
+  observerUID: Subject<string> = new Subject();
 
-  subscriber$: Observable<Task>  = this.observer.asObservable();
-  subscriberEdit$: Observable<Task>  = this.observerEdit.asObservable();
-  subscriberUID$: Observable<string>  = this.observerUID.asObservable();
+  subscriber$: Observable<Task> = this.observer.asObservable();
+  subscriberEdit$: Observable<Task> = this.observerEdit.asObservable();
+  subscriberUID$: Observable<string> = this.observerUID.asObservable();
 
   emitData(data: Task) {
     this.observer.next(data);
   }
 
-  emitEditData(data: Task){
-    this.observerEdit.next(data)
+  emitEditData(data: Task) {
+    this.observerEdit.next(data);
   }
 
-  emitUIDData(uid: string){
-    this.observerUID.next(uid)
+  emitUIDData(uid: string) {
+    this.observerUID.next(uid);
   }
 
-  getAllTaskToLocalStorage(tasks: Task[]){
-    localStorage.setItem("task", JSON.stringify(tasks))
+  getAllTaskToLocalStorage(tasks: Task[]) {
+    localStorage.setItem('task', JSON.stringify(tasks));
   }
 
-  addTask(task: Task): Observable<Task>{
-    return this.http.post<Task>(this.serviceURL, task)
+  addTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(this.serviceURL, task);
   }
-  getAllTask(): Observable<Task[]>{
-    return this.http.get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`)
+  getAllTask(): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`);
   }
-  deleteTask(task: Task): Observable<Task>{
-    return this.http.delete<Task>(`${this.serviceURL}/${task.id}`)
+  deleteTask(task: Task): Observable<Task> {
+    return this.http.delete<Task>(`${this.serviceURL}/${task.id}`);
   }
-  editTask(task: Task): Observable<Task>{
-    return this.http.put<Task>(`${this.serviceURL}/${task.id}`, task)
+  editTask(task: Task): Observable<Task> {
+    return this.http.put<Task>(`${this.serviceURL}/${task.id}`, task);
   }
 
-  createNewUser(uid: string){
-    this.emitUIDData(uid)
+  createNewUser(uid: string) {
+    this.emitUIDData(uid);
   }
 
   constructor(private http: HttpClient) {
-    this.serviceURL = "http://localhost:3000/tasks"
+    this.serviceURL = 'http://localhost:3000/tasks'; //TODO: такое лучше выносить в environment
   }
 }

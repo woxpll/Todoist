@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,29 +10,28 @@ import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.co
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 
-import {HttpClientModule} from "@angular/common/http";
-import {ButtonModule} from "primeng/button";
-import {CardModule} from "primeng/card";
-import {InputTextModule} from "primeng/inputtext";
-import {PasswordModule} from "primeng/password";
+import { HttpClientModule } from '@angular/common/http';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {TableModule} from "primeng/table";
-import {CalendarModule} from "primeng/calendar";
-import {DropdownModule} from "primeng/dropdown";
-import {DialogModule} from "primeng/dialog";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { TableModule } from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
 
-
-import {provideFirebaseApp} from "@angular/fire/app";
-import {environment} from "../environments/environmen";
-import firebase from "firebase/compat/app";
-import initializeApp = firebase.initializeApp;
-import {getAuth, provideAuth} from "@angular/fire/auth";
-import {AngularFireModule} from "@angular/fire/compat";
+import { provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environmen';
+import firebase from 'firebase/compat/app';
+import initializeApp = firebase.initializeApp; //TODO: никакого firebase, нужно переделать на LocalStorage
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire/compat';
 import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
-import {RippleModule} from "primeng/ripple";
+import { RippleModule } from 'primeng/ripple';
 
 @NgModule({
   declarations: [
@@ -43,7 +42,7 @@ import {RippleModule} from "primeng/ripple";
     RegisterPageComponent,
     FormComponent,
     TableComponent,
-    ModalDialogComponent
+    ModalDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,9 +67,9 @@ import {RippleModule} from "primeng/ripple";
     provideAuth(() => getAuth()),
 
     // error
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
