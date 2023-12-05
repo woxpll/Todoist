@@ -49,8 +49,8 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem(LocalStorage.TASKS);
-    localStorage.removeItem(LocalStorage.USERS);
+    localStorage.removeItem("uid");
+    localStorage.removeItem("task");
     this.router.navigate([Redirection.LOGIN]);
   }
 }

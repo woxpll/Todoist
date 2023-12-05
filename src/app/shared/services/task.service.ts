@@ -9,19 +9,21 @@ export class TaskService {
   uid = localStorage.getItem('uid')!;
   // uid = JSON.parse(this.uid$);
 
-  tasksStorage!: Task[]
+  tasksStorage: Task[]
   tasks: Task[]
   check() {
-    this.http
-      .get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`)
-      .subscribe((data) => {
-        if (data.length === 0) {
-          this.createNewUser(this.uid);
-        }
-      });
+    // this.http
+    //   .get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`)
+    //   .subscribe((data) => {
+    //     if (data.length === 0) {
+    //       this.createNewUser(this.uid);
+    //     }
+    //   });
     this.tasksStorage = JSON.parse(localStorage.getItem("tasks")!)
-    if (this.tasksStorage.length > 0){
+    if (this.tasksStorage){
       this.tasks = this.tasksStorage.filter(value => value.uid === this.uid)
+    }else {
+
     }
   }
 
@@ -54,8 +56,8 @@ export class TaskService {
     console.log(this.tasks)
     this.tasks.push(task)
     this.tasksStorage.push(task)
-    localStorage.setItem("user", JSON.stringify(this.tasks))
-    localStorage.setItem("users", JSON.stringify(this.tasksStorage))
+    localStorage.setItem("task", JSON.stringify(this.tasks))
+    localStorage.setItem("tasks", JSON.stringify(this.tasksStorage))
     console.log(task)
     // return this.http.post<Task>(this.serviceURL, task);
   }
@@ -67,8 +69,30 @@ export class TaskService {
   deleteTask(task: Task): Observable<Task> {
     return this.http.delete<Task>(`${this.serviceURL}/${task.id}`);
   }
-  editTask(task: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.serviceURL}/${task.id}`, task);
+  editTask(taskEdit: Task): Observable<Task> {
+    const index: number = this.tasks.findIndex(n => n.id === taskEdit.id)
+    this.tasksStorage = this.tasks = this.tasks.reduce((acc: Task[], task: Task): Task[] => {
+      if (task.id === index) {
+        return [...acc, {
+          uid: taskEdit.uid,
+          id: taskEdit.id,
+          name: taskEdit.name,
+          description: taskEdit.description,
+          category: taskEdit.category,
+          deadline: taskEdit.deadline,
+          priority: taskEdit.priority,
+          status: taskEdit.status
+        }]
+      }
+      return [...acc, task]
+    }, [])
+    console.log(this.tasksStorage)
+    console.log(this.tasks)
+    localStorage.setItem("task", JSON.stringify(this.tasks))
+    localStorage.setItem("tasks", JSON.stringify(this.tasksStorage))
+    const editTaskSubject$ = new BehaviorSubject<Task>(taskEdit)
+    return editTaskSubject$.asObservable()
+    // return this.http.put<Task>(`${this.serviceURL}/${task.id}`, task);
   }
 
   createNewUser(uid: string) {

@@ -43,9 +43,7 @@ export class TableComponent implements OnInit{
   }
 
   editTask(task: Task){
-    this.taskService.editTask(task).subscribe(next => {
-      console.log(next)
-    })
+    this.taskService.editTask(task).subscribe()
     const index: number = this.tasks.findIndex(n => n.id === task.id)
     this.tasks = this.tasks.reduce((acc: Task[], task: Task): Task[] => {
       if (task.id === index) {
