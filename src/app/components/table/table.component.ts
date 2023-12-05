@@ -35,18 +35,16 @@ export class TableComponent implements OnInit{
 
   getAllTask(){
     this.taskService.getAllTask().subscribe(next => {
-      console.log(next)
       this.tasks = next
     },error => {
       alert(error)
     })
   }
 
-  editTask(task: Task){
-    this.taskService.editTask(task).subscribe()
-    const index: number = this.tasks.findIndex(n => n.id === task.id)
+  editTask(taskEdit: Task){
+    this.taskService.editTask(taskEdit).subscribe()
     this.tasks = this.tasks.reduce((acc: Task[], task: Task): Task[] => {
-      if (task.id === index) {
+      if (task.id === taskEdit.id) {
         return [...acc, {
           uid: this.task.uid,
           id: this.task.id,
@@ -63,8 +61,6 @@ export class TableComponent implements OnInit{
   }
 
   deleteTask(task: Task){
-    const index = this.tasks.findIndex(n => n.id === task.id)
-    delete this.tasks[index]
     this.taskService.deleteTask(task).subscribe()
   }
 

@@ -39,10 +39,15 @@ export class TaskService{
     this.tasksStorage = JSON.parse(localStorage.getItem("tasks")!)
     this.uid = localStorage.getItem("uid")!
     if (this.tasksStorage){
-      this.tasks = this.tasksStorage.filter(value => value.uid === this.uid)
+      this.tasks = this.tasksStorage.filter(value => {
+        if (value === null){
+          return
+        }
+        return value.uid === this.uid
+      })
       console.log(this.tasks)
     }else {
-
+      this.tasksStorage = []
     }
   }
 
@@ -59,32 +64,53 @@ export class TaskService{
   }
 
   addTask(task: Task) {
+    console.log(this.tasksStorage)
     if (this.tasksStorage.length > 0){
       task.id = this.tasksStorage.length + 1
     }else {
       task.id = 0
     }
-    console.log(this.tasks)
     this.tasks.push(task)
     this.tasksStorage.push(task)
     localStorage.setItem("task", JSON.stringify(this.tasks))
     localStorage.setItem("tasks", JSON.stringify(this.tasksStorage))
-    console.log(task)
     // return this.http.post<Task>(this.serviceURL, task);
   }
   getAllTask(): Observable<Task[]> {
-    console.log(this.tasks)
     const allTaskSubject$ = new BehaviorSubject<Task[]>(this.tasks)
     return allTaskSubject$.asObservable()
     // return this.http.get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`);
   }
   deleteTask(task: Task): Observable<Task> {
-    return this.http.delete<Task>(`${this.serviceURL}/${task.id}`);
+    console.log(task)
+    console.log(this.tasks)
+    console.log(this.tasksStorage)
+    const index = this.tasks.findIndex(n => {
+      if (n.id === null){
+        return
+      }
+      return n.id === task.id
+    })
+    const indexStorage = this.tasksStorage.findIndex(n => {
+      if (n === null){
+        return
+      }
+      return n.id === task.id
+    })
+    console.log(index)
+    delete this.tasks[index]
+    delete this.tasksStorage[indexStorage]
+
+    localStorage.setItem("task", JSON.stringify(this.tasks))
+    localStorage.setItem("tasks", JSON.stringify(this.tasksStorage))
+
+    const deleteTaskSubject$ = new BehaviorSubject<Task>(task)
+    return deleteTaskSubject$.asObservable()
+    // return this.http.delete<Task>(`${this.serviceURL}/${task.id}`);
   }
   editTask(taskEdit: Task): Observable<Task> {
-    const index: number = this.tasks.findIndex(n => n.id === taskEdit.id)
     this.tasksStorage = this.tasks = this.tasks.reduce((acc: Task[], task: Task): Task[] => {
-      if (task.id === index) {
+      if (task.id === taskEdit.id) {
         return [...acc, {
           uid: taskEdit.uid,
           id: taskEdit.id,
@@ -98,8 +124,6 @@ export class TaskService{
       }
       return [...acc, task]
     }, [])
-    console.log(this.tasksStorage)
-    console.log(this.tasks)
     localStorage.setItem("task", JSON.stringify(this.tasks))
     localStorage.setItem("tasks", JSON.stringify(this.tasksStorage))
     const editTaskSubject$ = new BehaviorSubject<Task>(taskEdit)
