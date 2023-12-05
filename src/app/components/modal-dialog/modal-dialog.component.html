@@ -12,44 +12,116 @@
     <span class="text-xl font-bold">Измение задачи</span>
   </ng-template>
   <form [formGroup]="formEdit">
-    <div>
-      <input
-        type="text"
-        pInputText
-        formControlName="name"
-      />
-    </div>
-    <div>
-      <input
-        type="text"
-        pInputText
-        formControlName="description"
-      />
-    </div>
-    <div>
-      <input
-        type="text"
-        pInputText
-        formControlName="category"
-      />
-    </div>
-    <div>
-      <p-calendar
-        dateFormat="dd.mm.yy"
-        formControlName="deadline"
-        [showIcon]="true"
-        dataType="string"
-      ></p-calendar>
-    </div>
-    <div>
-      <p-dropdown
-        formControlName="priority"
-        [options]="priority"
-        [showClear]="true"
-        optionLabel="name"
-        placeholder="Выбрать приоритет"
-      ></p-dropdown>
-    </div>
+    <div class="grid justify-content-between">
+      <div class="col-5">
+        <div class="field">
+          <label for="nameEdit">{{ TasksEnum.NAME_TASK }}</label>
+          <input
+            aria-describedby="name-help"
+            class="w-full"
+            id="nameEdit"
+            type="text"
+            pInputText
+            formControlName="name"
+            [ngClass]="{'ng-invalid ng-dirty': formEdit.get('name')?.invalid && formEdit.get('name')?.touched}"
+          />
+          <small
+            id="nameEdit-help"
+            class="p-error"
+            *ngIf="formEdit.get('name')?.invalid && formEdit.get('name')?.touched"
+          >
+            <small *ngIf="formEdit.get('name')?.errors?.['required']">Обязательное поле</small>
+          </small>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="field">
+          <label for="descriptionEdit">{{ TasksEnum.DESCRIPTION_TASK }}</label>
+          <input
+            aria-describedby="descriptionEdit-help"
+            class="w-full"
+            id="descriptionEdit"
+            type="text"
+            pInputText
+            formControlName="description"
+            [ngClass]="{'ng-invalid ng-dirty': formEdit.get('description')?.invalid && formEdit.get('description')?.touched}"
+          />
+          <small
+            id="descriptionEdit-help"
+            class="p-error"
+            *ngIf="formEdit.get('description')?.invalid && formEdit.get('description')?.touched"
+          >
+            <small *ngIf="formEdit.get('description')?.errors?.['required']">Обязательное поле</small>
+          </small>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="field">
+          <label for="categoryEdit">{{ TasksEnum.CATEGORY_TASK }}</label>
+          <input
+            aria-describedby="categoryEdit-help"
+            class="w-full"
+            id="categoryEdit"
+            type="text"
+            pInputText
+            formControlName="category"
+            [ngClass]="{'ng-invalid ng-dirty': formEdit.get('category')?.invalid && formEdit.get('category')?.touched}"
+          />
+          <small
+            id="categoryEdit-help"
+            class="p-error"
+            *ngIf="formEdit.get('category')?.invalid && formEdit.get('category')?.touched"
+          >
+            <small *ngIf="formEdit.get('category')?.errors?.['required']">Обязательное поле</small>
+          </small>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="field">
+          <label for="deadlineEdit">{{ TasksEnum.CATEGORY_TASK }}</label>
+          <p-calendar
+            class="w-full"
+            dateFormat="dd.mm.yy"
+            formControlName="deadline"
+            [showIcon]="true"
+            dataType="string"
+            id="deadlineEdit"
+            aria-describedby="deadlineEdit-help"
+            [ngClass]="{'ng-invalid ng-dirty': formEdit.get('deadline')?.invalid && formEdit.get('deadline')?.touched}"
+          ></p-calendar>
+          <small
+            id="deadlineEdit-help"
+            class="p-error"
+            *ngIf="formEdit.get('deadline')?.invalid && formEdit.get('deadline')?.touched"
+          >
+            <small *ngIf="formEdit.get('deadline')?.errors?.['required']">Обязательное поле</small>
+          </small>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="field">
+          <label for="priorityEdit">{{ TasksEnum.PRIORITY_TASK }}</label>
+          <p-dropdown
+            [style]="{'width':'100%'}"
+            formControlName="priority"
+            [options]="priority"
+            [showClear]="true"
+            optionLabel="name"
+            placeholder="Выбрать приоритет"
+            id="priorityEdit"
+            aria-describedby="priority-help"
+            [ngClass]="{'ng-invalid ng-dirty': formEdit.get('priority')?.invalid && formEdit.get('priority')?.touched}"
+          ></p-dropdown>
+          <small
+            id="priorityEdit-help"
+            class="p-error"
+            *ngIf="formEdit.get('priority')?.invalid && formEdit.get('priority')?.touched"
+          >
+            <small *ngIf="formEdit.get('priority')?.errors?.['required']">Обязательное поле</small>
+          </small>
+        </div>
+      </div>
+  </div>
   </form>
   <ng-template pTemplate="footer">
     <form

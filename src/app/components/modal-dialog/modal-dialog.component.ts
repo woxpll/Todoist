@@ -4,6 +4,7 @@ import {Priority} from "../../shared/interfaces/priority";
 import {Task} from "../../shared/interfaces/task";
 import {TaskService} from "../../shared/services/task.service";
 import {ITaskForm} from "../../shared/interfaces/itask-form";
+import {TasksEnum} from "../../shared/enums/tasks-enum";
 
 @Component({
   selector: 'app-modal-dialog',
@@ -48,4 +49,5 @@ export class ModalDialogComponent implements OnInit{
     this.visible = true;
   }
 
+  protected readonly TasksEnum = TasksEnum;
 }
