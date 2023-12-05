@@ -37,7 +37,7 @@ export class FormComponent implements OnInit{
   }
 
   addTask(task: Task){
-    this.taskService.addTask(task).subscribe()
+    this.taskService.addTask(task)
   }
 
   submit(){

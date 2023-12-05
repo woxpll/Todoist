@@ -1,7 +1,7 @@
 {
   "tasks": [
     {
-      "uid": "mGvG57ssiTZupVp92nyyucNFHx22",
+      "uid": "a048cf3d-88b5-40bb-8ced-209eb5cd349e",
       "name": "wer",
       "description": "wer",
       "category": "ter",
@@ -45,7 +45,7 @@
         "name": "Срочно"
       },
       "status": false,
-      "uid": "mGvG57ssiTZupVp92nyyucNFHx22",
+      "uid": "a048cf3d-88b5-40bb-8ced-209eb5cd349e",
       "id": 1
     },
     {
@@ -57,7 +57,7 @@
         "name": "Срочно"
       },
       "status": false,
-      "uid": "mGvG57ssiTZupVp92nyyucNFHx22",
+      "uid": "a048cf3d-88b5-40bb-8ced-209eb5cd349e",
       "id": 2
     }
   ]

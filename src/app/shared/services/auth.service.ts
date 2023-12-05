@@ -17,7 +17,6 @@ export class AuthService {
 
     if (localStorage.getItem(LocalStorage.USERS)){
       this.users = JSON.parse(localStorage.getItem(LocalStorage.USERS)!)
-      console.log(this.users)
     }
   }
 

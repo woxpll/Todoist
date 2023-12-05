@@ -20,8 +20,9 @@ export class TableComponent implements OnInit{
   ngOnInit(): void {
 
     this.tasks = []
-    this.getAllTask()
     this.taskService.check()
+    this.getAllTask()
+
 
     this.taskService.subscriber$.subscribe(data => {
       this.tasks.push(data)
@@ -34,8 +35,8 @@ export class TableComponent implements OnInit{
 
   getAllTask(){
     this.taskService.getAllTask().subscribe(next => {
+      console.log(next)
       this.tasks = next
-      this.taskService.getAllTaskToLocalStorage(this.tasks)
     },error => {
       alert(error)
     })
