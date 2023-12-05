@@ -44,7 +44,7 @@ export class FormComponent implements OnInit{
     const {} = this.task = this.form.value
     this.task.status = false
     this.task.uid = this.taskService.uid = undefined ? this.uid : this.taskService.uid
-    this.taskService.emitData(this.task)
+    // this.taskService.emitData(this.task)
     this.addTask(this.task)
     this.form.reset()
   }

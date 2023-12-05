@@ -20,7 +20,9 @@ export class TaskService {
         }
       });
     this.tasksStorage = JSON.parse(localStorage.getItem("tasks")!)
-    this.tasks = this.tasksStorage.filter(value => value.uid === this.uid)
+    if (this.tasksStorage.length > 0){
+      this.tasks = this.tasksStorage.filter(value => value.uid === this.uid)
+    }
   }
 
   observer: Subject<Task> = new Subject();
@@ -44,11 +46,16 @@ export class TaskService {
   }
 
   addTask(task: Task) {
-    task.id = this.tasksStorage.length + 1
+    if (this.tasksStorage.length > 0){
+      task.id = this.tasksStorage.length + 1
+    }else {
+      task.id = 0
+    }
+    console.log(this.tasks)
     this.tasks.push(task)
     this.tasksStorage.push(task)
-    localStorage.setItem("task", JSON.stringify(this.tasks))
-    localStorage.setItem("tasks", JSON.stringify(this.tasksStorage))
+    localStorage.setItem("user", JSON.stringify(this.tasks))
+    localStorage.setItem("users", JSON.stringify(this.tasksStorage))
     console.log(task)
     // return this.http.post<Task>(this.serviceURL, task);
   }
