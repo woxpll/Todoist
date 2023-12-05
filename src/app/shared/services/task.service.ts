@@ -3,14 +3,31 @@ import {HttpClient} from '@angular/common/http';
 import {Task} from '../interfaces/task';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 
+
 @Injectable()
-export class TaskService {
+export class TaskService{
   serviceURL: string;
-  uid = localStorage.getItem('uid')!;
+  uid!: string
+
   // uid = JSON.parse(this.uid$);
 
   tasksStorage: Task[]
   tasks: Task[]
+
+  observer: Subject<Task> = new Subject();
+  observerEdit: Subject<Task> = new Subject();
+  observerUID: Subject<string> = new Subject();
+
+  subscriber$: Observable<Task> = this.observer.asObservable();
+  subscriberEdit$: Observable<Task> = this.observerEdit.asObservable();
+  subscriberUID$: Observable<string> = this.observerUID.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.serviceURL = 'http://localhost:3000/tasks'; //TODO: такое лучше выносить в environment
+    this.tasksStorage = []
+    this.tasks = []
+  }
+
   check() {
     // this.http
     //   .get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`)
@@ -20,20 +37,14 @@ export class TaskService {
     //     }
     //   });
     this.tasksStorage = JSON.parse(localStorage.getItem("tasks")!)
+    this.uid = localStorage.getItem("uid")!
     if (this.tasksStorage){
       this.tasks = this.tasksStorage.filter(value => value.uid === this.uid)
+      console.log(this.tasks)
     }else {
 
     }
   }
-
-  observer: Subject<Task> = new Subject();
-  observerEdit: Subject<Task> = new Subject();
-  observerUID: Subject<string> = new Subject();
-
-  subscriber$: Observable<Task> = this.observer.asObservable();
-  subscriberEdit$: Observable<Task> = this.observerEdit.asObservable();
-  subscriberUID$: Observable<string> = this.observerUID.asObservable();
 
   emitData(data: Task) {
     this.observer.next(data);
@@ -62,6 +73,7 @@ export class TaskService {
     // return this.http.post<Task>(this.serviceURL, task);
   }
   getAllTask(): Observable<Task[]> {
+    console.log(this.tasks)
     const allTaskSubject$ = new BehaviorSubject<Task[]>(this.tasks)
     return allTaskSubject$.asObservable()
     // return this.http.get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`);
@@ -97,11 +109,5 @@ export class TaskService {
 
   createNewUser(uid: string) {
     this.emitUIDData(uid);
-  }
-
-  constructor(private http: HttpClient) {
-    this.serviceURL = 'http://localhost:3000/tasks'; //TODO: такое лучше выносить в environment
-    this.tasksStorage = []
-    this.tasks = []
   }
 }
