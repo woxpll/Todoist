@@ -23,7 +23,6 @@ export class TableComponent implements OnInit{
     this.taskService.check()
     this.getAllTask()
 
-
     this.taskService.subscriber$.subscribe(data => {
       this.tasks.push(data)
     });
@@ -33,7 +32,7 @@ export class TableComponent implements OnInit{
     })
   }
 
-  getAllTask(){
+  private getAllTask(){
     this.taskService.getAllTask().subscribe(next => {
       this.tasks = next
     },error => {
@@ -41,7 +40,7 @@ export class TableComponent implements OnInit{
     })
   }
 
-  editTask(taskEdit: Task){
+  private editTask(taskEdit: Task){
     this.taskService.editTask(taskEdit).subscribe()
     this.tasks = this.tasks.reduce((acc: Task[], task: Task): Task[] => {
       if (task.id === taskEdit.id) {
@@ -60,11 +59,11 @@ export class TableComponent implements OnInit{
     }, [])
   }
 
-  deleteTask(task: Task){
+  protected deleteTask(task: Task){
     this.taskService.deleteTask(task).subscribe()
   }
 
-  doneTask(task: Task){
+  protected doneTask(task: Task){
     this.task = task
     this.task.isDone = !this.task.isDone
   }

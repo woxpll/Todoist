@@ -12,8 +12,8 @@ import {Redirection} from "../../shared/enums/redirection";
 })
 export class LoginPageComponent implements OnInit, OnDestroy{
 
-  form!: FormGroup
-  aSub!: Subscription
+  protected form!: FormGroup
+  private aSub!: Subscription
 
   constructor(private auth: AuthService,
               private router: Router,
@@ -44,7 +44,7 @@ export class LoginPageComponent implements OnInit, OnDestroy{
     }
   }
 
-  onSubmit(){
+  protected onSubmit(){
     this.form.disable()
     this.aSub = this.auth.login(this.form.value).subscribe(
       value => {

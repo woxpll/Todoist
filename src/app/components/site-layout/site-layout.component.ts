@@ -10,7 +10,7 @@ export class SiteLayoutComponent {
 
   constructor(private authService: AuthService) { }
 
-  onLogout(){
+  protected onLogout(){
     this.authService.logout()
   }
 }

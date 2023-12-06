@@ -29,18 +29,18 @@ export class FormComponent implements OnInit{
       description: new FormControl(null, Validators.required),
       category: new FormControl(null, Validators.required),
       deadline: new FormControl(null, Validators.required),
-      priority: new FormControl(this.priority, Validators.required),
+      priority: new FormControl(null, Validators.required),
     })
     this.taskService.subscriberUID$.subscribe(next => {
       this.uid = next
     })
   }
 
-  addTask(task: Task){
+  private addTask(task: Task){
     this.taskService.addTask(task)
   }
 
-  submit(){
+  protected submit(){
     const {} = this.task = this.form.value
     this.task.isDone = false
     this.task.uid = this.taskService.uid = undefined ? this.uid : this.taskService.uid

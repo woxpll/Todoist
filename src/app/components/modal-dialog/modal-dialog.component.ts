@@ -14,12 +14,12 @@ import {TasksEnum} from "../../shared/enums/tasks-enum";
 export class ModalDialogComponent implements OnInit{
 
   @Input()
-  task!: Task
+  public task!: Task
 
-  priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
+  protected priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
 
   formEdit!: FormGroup
-  visible: boolean = false;
+  protected visible: boolean = false;
 
   constructor(private taskService: TaskService) {
   }
@@ -33,7 +33,7 @@ export class ModalDialogComponent implements OnInit{
     })
   }
 
-  submitEdit(){
+  protected submitEdit(){
     const status = this.task.isDone
     const id = this.task.id
     const {} = this.task = this.formEdit.value
@@ -45,7 +45,7 @@ export class ModalDialogComponent implements OnInit{
     this.taskService.emitEditData(this.task)
   }
 
-  showDialog() {
+  protected showDialog() {
     this.visible = true;
   }
 
