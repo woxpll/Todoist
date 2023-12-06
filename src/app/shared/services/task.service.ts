@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Task} from '../interfaces/task';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {environment} from "../../../environments/environmen";
+import {LocalStorage} from "../enums/local-storage";
 
 
 @Injectable()
@@ -37,8 +38,8 @@ export class TaskService{
     //       this.createNewUser(this.uid);
     //     }
     //   });
-    this.tasksStorage = JSON.parse(localStorage.getItem("tasks")!)
-    this.uid = localStorage.getItem("uid")!
+    this.tasksStorage = JSON.parse(localStorage.getItem(LocalStorage.TASKS)!)
+    this.uid = localStorage.getItem(LocalStorage.UID)!
     if (this.tasksStorage){
       this.tasks = this.tasksStorage.filter(value => {
         if (value === null){
@@ -72,8 +73,8 @@ export class TaskService{
     }
     this.tasks.push(task)
     this.tasksStorage.push(task)
-    localStorage.setItem("task", JSON.stringify(this.tasks))
-    localStorage.setItem("tasks", JSON.stringify(this.tasksStorage))
+    localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
+    localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
     // return this.http.post<Task>(this.serviceURL, task);
   }
   getAllTask(): Observable<Task[]> {
@@ -97,8 +98,8 @@ export class TaskService{
     delete this.tasks[index]
     delete this.tasksStorage[indexStorage]
 
-    localStorage.setItem("task", JSON.stringify(this.tasks))
-    localStorage.setItem("tasks", JSON.stringify(this.tasksStorage))
+    localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
+    localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
 
     const deleteTaskSubject$ = new BehaviorSubject<Task>(task)
     return deleteTaskSubject$.asObservable()
@@ -120,8 +121,8 @@ export class TaskService{
       }
       return [...acc, task]
     }, [])
-    localStorage.setItem("task", JSON.stringify(this.tasks))
-    localStorage.setItem("tasks", JSON.stringify(this.tasksStorage))
+    localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
+    localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
     const editTaskSubject$ = new BehaviorSubject<Task>(taskEdit)
     return editTaskSubject$.asObservable()
     // return this.http.put<Task>(`${this.serviceURL}/${task.id}`, task);

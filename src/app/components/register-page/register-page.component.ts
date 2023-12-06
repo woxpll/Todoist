@@ -4,7 +4,6 @@ import {AuthService} from "../../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {ISignForm} from "../../shared/interfaces/isign-form";
-import {Redirection} from "../../shared/enums/redirection";
 import {Message} from "primeng/api";
 
 @Component({

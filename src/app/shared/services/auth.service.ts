@@ -23,7 +23,7 @@ export class AuthService {
   login(user: User): Observable<boolean>{
     const userData: User | undefined = this.users.find(value => value.email === user.email)
     if(userData?.password === user.password){
-      localStorage.setItem("uid", userData.id)
+      localStorage.setItem(LocalStorage.UID, userData.id)
       return of(true)
     }else {
       return of(false)
@@ -44,13 +44,13 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem(LocalStorage.USERS)!); // TODO: никаких non-null assertion, ошибки проверки типов твои друзья, а не враги. Используй type guard механизм.
+    const user = localStorage.getItem(LocalStorage.UID);
     return !!user;
   }
 
   logout() {
-    localStorage.removeItem("uid");
-    localStorage.removeItem("task");
+    localStorage.removeItem(LocalStorage.UID);
+    localStorage.removeItem(LocalStorage.TASK);
     this.router.navigate([Redirection.LOGIN]);
   }
 }
