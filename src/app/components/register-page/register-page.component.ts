@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {ISignForm} from "../../shared/interfaces/isign-form";
 import {Redirection} from "../../shared/enums/redirection";
+import {Message} from "primeng/api";
 
 @Component({
   selector: 'app-register-page',
@@ -15,6 +16,8 @@ export class RegisterPageComponent implements OnInit, OnDestroy{
 
   protected form!: FormGroup
   private aSub!: Subscription
+
+  protected messages!: Message[]
 
   constructor(private auth: AuthService,
               private router: Router) {
@@ -44,7 +47,9 @@ export class RegisterPageComponent implements OnInit, OnDestroy{
             }
           })
         }else {
-          console.log("Пользаватель уже существует")
+          this.messages = [
+            { severity: 'error', summary: 'Ошибка', detail: 'Пользаватель уже существует' },
+          ];
           this.form.reset()
           this.form.enable()
         }

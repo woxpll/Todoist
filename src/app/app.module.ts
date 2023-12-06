@@ -28,6 +28,7 @@ import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { RippleModule } from 'primeng/ripple'
+import {MessagesModule} from "primeng/messages";
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { RippleModule } from 'primeng/ripple'
     DropdownModule,
     DialogModule,
     RippleModule,
+    MessagesModule,
   ],
   providers: [
     AuthService,

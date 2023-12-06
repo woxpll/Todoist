@@ -5,6 +5,7 @@ import {Subscription} from "rxjs";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ISignForm} from "../../shared/interfaces/isign-form";
 import {Redirection} from "../../shared/enums/redirection";
+import {Message} from "primeng/api";
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -14,6 +15,8 @@ export class LoginPageComponent implements OnInit, OnDestroy{
 
   protected form!: FormGroup
   private aSub!: Subscription
+
+  protected messages!: Message[]
 
   constructor(private auth: AuthService,
               private router: Router,
@@ -51,7 +54,9 @@ export class LoginPageComponent implements OnInit, OnDestroy{
         if (value){
           this.router.navigate([Redirection.DASHBOARD])
         }else {
-          console.log("Никак")
+          this.messages = [
+            { severity: 'error', summary: 'Ошибка', detail: 'Неправильй email или пароль' },
+          ];
           this.form.reset()
           this.form.enable()
         }
