@@ -2,3 +2,11 @@
 @import '~primeicons/primeicons.css';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.ng-touched {
+  border-color: #e24c4c;
+}
+
+p-password:root .ng-touched{
+  border-color: #e24c4c;
+}

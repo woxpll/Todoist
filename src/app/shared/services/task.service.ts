@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Task} from '../interfaces/task';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {environment} from "../../../environments/environmen";
 
 
 @Injectable()
@@ -23,7 +24,7 @@ export class TaskService{
   subscriberUID$: Observable<string> = this.observerUID.asObservable();
 
   constructor(private http: HttpClient) {
-    this.serviceURL = 'http://localhost:3000/tasks'; //TODO: такое лучше выносить в environment
+    this.serviceURL = environment.apiUrl;
     this.tasksStorage = []
     this.tasks = []
   }
@@ -64,7 +65,6 @@ export class TaskService{
   }
 
   addTask(task: Task) {
-    console.log(this.tasksStorage)
     if (this.tasksStorage.length > 0){
       task.id = this.tasksStorage.length + 1
     }else {
@@ -82,9 +82,6 @@ export class TaskService{
     // return this.http.get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`);
   }
   deleteTask(task: Task): Observable<Task> {
-    console.log(task)
-    console.log(this.tasks)
-    console.log(this.tasksStorage)
     const index = this.tasks.findIndex(n => {
       if (n.id === null){
         return
@@ -97,7 +94,6 @@ export class TaskService{
       }
       return n.id === task.id
     })
-    console.log(index)
     delete this.tasks[index]
     delete this.tasksStorage[indexStorage]
 

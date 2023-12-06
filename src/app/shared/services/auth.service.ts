@@ -45,7 +45,7 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem(LocalStorage.USERS)!); // TODO: никаких non-null assertion, ошибки проверки типов твои друзья, а не враги. Используй type guard механизм.
-    return user !== null;
+    return !!user;
   }
 
   logout() {

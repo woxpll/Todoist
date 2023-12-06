@@ -1,4 +1,6 @@
 export const environment = {
+  apiUrl: "http://localhost:3000/tasks",
+
   firebase: {
     apiKey: "AIzaSyDn9PyP0Fsf4nQ777GTJ7PGHNp_zbWdC9U",
     authDomain: "todolist-99e42.firebaseapp.com",

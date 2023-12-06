@@ -1,3 +1,5 @@
+import {Priority} from "./priority";
+
 export interface Task {
   uid: string
   id: number
@@ -5,9 +7,6 @@ export interface Task {
   description: string
   category: string
   deadline: string
-  priority: {
-    // TODO: есть интерфейс Priority почему не переиспользуется?
-    name: string
-  };
+  priority: Priority
   status: boolean // TODO: почему статус boolean? Может быть некорректное название свойства
 }
