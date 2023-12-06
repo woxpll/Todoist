@@ -115,7 +115,7 @@ export class TaskService{
           category: taskEdit.category,
           deadline: taskEdit.deadline,
           priority: taskEdit.priority,
-          status: taskEdit.status
+          isDone: taskEdit.isDone
         }]
       }
       return [...acc, task]

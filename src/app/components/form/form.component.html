@@ -75,7 +75,6 @@
             dataType="string"
             id="deadline"
             aria-describedby="deadline-help"
-            [ngClass]="{'ng-invalid ng-dirty': form.get('deadline')?.invalid && form.get('deadline')?.touched}"
           ></p-calendar>
           <small
             id="deadline-help"
@@ -98,7 +97,6 @@
             placeholder="Выбрать приоритет"
             id="priority"
             aria-describedby="priority-help"
-            [ngClass]="{'ng-invalid ng-dirty': form.get('priority')?.invalid && form.get('priority')?.touched}"
           ></p-dropdown>
           <small
             id="priority-help"

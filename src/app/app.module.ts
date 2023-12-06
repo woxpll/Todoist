@@ -9,8 +9,8 @@ import {AuthService} from "./shared/services/auth.service";
 import {TaskService} from "./shared/services/task.service";
 
 import { LoginPageComponent } from './components/login-page/login-page.component';
-import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
-import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
+import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
+import { SiteLayoutComponent } from './components/site-layout/site-layout.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 
 import { HttpClientModule } from '@angular/common/http';

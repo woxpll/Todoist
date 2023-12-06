@@ -53,7 +53,7 @@ export class TableComponent implements OnInit{
           category: this.task.category,
           deadline: this.task.deadline,
           priority: this.task.priority,
-          status: this.task.status
+          isDone: this.task.isDone
         }]
       }
       return [...acc, task]
@@ -66,6 +66,6 @@ export class TableComponent implements OnInit{
 
   doneTask(task: Task){
     this.task = task
-    this.task.status = !this.task.status
+    this.task.isDone = !this.task.isDone
   }
 }

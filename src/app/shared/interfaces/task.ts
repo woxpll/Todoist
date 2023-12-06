@@ -8,5 +8,5 @@ export interface Task {
   category: string
   deadline: string
   priority: Priority
-  status: boolean // TODO: почему статус boolean? Может быть некорректное название свойства
+  isDone: boolean
 }

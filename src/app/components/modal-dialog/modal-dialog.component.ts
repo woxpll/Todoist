@@ -34,13 +34,13 @@ export class ModalDialogComponent implements OnInit{
   }
 
   submitEdit(){
-    const status = this.task.status
+    const status = this.task.isDone
     const id = this.task.id
     const {} = this.task = this.formEdit.value
     console.log(this.task)
     this.task.uid = this.taskService.uid
     this.task.id = id
-    this.task.status = status
+    this.task.isDone = status
     this.visible = false
     this.taskService.emitEditData(this.task)
   }

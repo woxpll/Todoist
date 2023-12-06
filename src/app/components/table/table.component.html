@@ -34,13 +34,13 @@
     pTemplate="body"
     let-task
   >
-    <tr [ngClass]="{'done' : task.status === true}">
+    <tr [ngClass]="{'done' : task.isDone === true}">
       <td>{{task.name}}</td>
       <td>{{task.description}}</td>
       <td>{{task.category}}</td>
       <td>{{task.deadline}}</td>
       <td>{{task.priority.name}}</td>
-      <td>{{task.status}}
+      <td>{{task.isDone}}
         <p-button
           (onClick)="doneTask(task)"
           icon="pi pi-check"
