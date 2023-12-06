@@ -23,14 +23,13 @@
             type="text"
             pInputText
             formControlName="name"
-            [ngClass]="{'ng-invalid ng-dirty': formEdit.get('name')?.invalid && formEdit.get('name')?.touched}"
           />
           <small
             id="nameEdit-help"
             class="p-error"
-            *ngIf="formEdit.get('name')?.invalid && formEdit.get('name')?.touched"
+            *ngIf="formEdit.get('name')?.invalid &&(formEdit.get('name')?.dirty && formEdit.get('name')?.touched)"
           >
-            <small *ngIf="formEdit.get('name')?.errors?.['required']">Обязательное поле</small>
+            <small *ngIf="formEdit.get('name')?.errors?.['required']">{{TasksEnum.REQUIRED_TASK}}</small>
           </small>
         </div>
       </div>
@@ -44,14 +43,13 @@
             type="text"
             pInputText
             formControlName="description"
-            [ngClass]="{'ng-invalid ng-dirty': formEdit.get('description')?.invalid && formEdit.get('description')?.touched}"
           />
           <small
             id="descriptionEdit-help"
             class="p-error"
-            *ngIf="formEdit.get('description')?.invalid && formEdit.get('description')?.touched"
+            *ngIf="formEdit.get('description')?.invalid &&(formEdit.get('description')?.dirty && formEdit.get('description')?.touched)"
           >
-            <small *ngIf="formEdit.get('description')?.errors?.['required']">Обязательное поле</small>
+            <small *ngIf="formEdit.get('description')?.errors?.['required']">{{TasksEnum.REQUIRED_TASK}}</small>
           </small>
         </div>
       </div>
@@ -65,14 +63,13 @@
             type="text"
             pInputText
             formControlName="category"
-            [ngClass]="{'ng-invalid ng-dirty': formEdit.get('category')?.invalid && formEdit.get('category')?.touched}"
           />
           <small
             id="categoryEdit-help"
             class="p-error"
-            *ngIf="formEdit.get('category')?.invalid && formEdit.get('category')?.touched"
+            *ngIf="formEdit.get('name')?.invalid &&(formEdit.get('category')?.dirty && formEdit.get('category')?.touched)"
           >
-            <small *ngIf="formEdit.get('category')?.errors?.['required']">Обязательное поле</small>
+            <small *ngIf="formEdit.get('categoryEdit')?.errors?.['required']">{{TasksEnum.REQUIRED_TASK}}</small>
           </small>
         </div>
       </div>
@@ -94,7 +91,7 @@
             class="p-error"
             *ngIf="formEdit.get('deadline')?.invalid && formEdit.get('deadline')?.touched"
           >
-            <small *ngIf="formEdit.get('deadline')?.errors?.['required']">Обязательное поле</small>
+            <small *ngIf="formEdit.get('deadline')?.errors?.['required']">{{TasksEnum.REQUIRED_TASK}}</small>
           </small>
         </div>
       </div>
@@ -115,9 +112,9 @@
           <small
             id="priorityEdit-help"
             class="p-error"
-            *ngIf="formEdit.get('priority')?.invalid && formEdit.get('priority')?.touched"
+            *ngIf="formEdit.get('priority')?.invalid && (formEdit.get('priority')?.dirty && formEdit.get('priority')?.touched)"
           >
-            <small *ngIf="formEdit.get('priority')?.errors?.['required']">Обязательное поле</small>
+            <small *ngIf="formEdit.get('priority')?.errors?.['required']">{{TasksEnum.REQUIRED_TASK}}</small>
           </small>
         </div>
       </div>
