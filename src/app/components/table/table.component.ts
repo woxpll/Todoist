@@ -12,7 +12,6 @@ export class TableComponent implements OnInit{
 
   protected readonly TasksEnum = TasksEnum;
 
-  task!: Task
   protected tasks: Task[]
 
   constructor(private taskService: TaskService) {
@@ -25,7 +24,6 @@ export class TableComponent implements OnInit{
     this.getAllTask()
 
     this.taskService.subscriberEdit$.subscribe(data => {
-      this.task = data
       this.editTask(data)
     })
   }
@@ -49,7 +47,6 @@ export class TableComponent implements OnInit{
   }
 
   protected doneTask(task: Task){
-    this.task = task
-    this.task.isDone = !this.task.isDone
+    this.taskService.doneTask(task)
   }
 }
