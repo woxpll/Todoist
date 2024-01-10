@@ -24,9 +24,6 @@ export class TableComponent implements OnInit{
     this.taskService.check()
     this.getAllTask()
 
-    this.taskService.subscriber$.subscribe(data => {
-      this.tasks.push(data)
-    });
     this.taskService.subscriberEdit$.subscribe(data => {
       this.task = data
       this.editTask(data)
@@ -42,22 +39,9 @@ export class TableComponent implements OnInit{
   }
 
   private editTask(taskEdit: Task){
-    this.taskService.editTask(taskEdit).subscribe()
-    this.tasks = this.tasks.reduce((acc: Task[], task: Task): Task[] => {
-      if (task.id === taskEdit.id) {
-        return [...acc, {
-          uid: this.task.uid,
-          id: this.task.id,
-          name: this.task.name,
-          description: this.task.description,
-          category: this.task.category,
-          deadline: this.task.deadline,
-          priority: this.task.priority,
-          isDone: this.task.isDone
-        }]
-      }
-      return [...acc, task]
-    }, [])
+    this.taskService.editTask(taskEdit).subscribe((data) => {
+      this.tasks = data
+    })
   }
 
   protected deleteTask(task: Task){

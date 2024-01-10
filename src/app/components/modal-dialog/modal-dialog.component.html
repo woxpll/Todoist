@@ -103,7 +103,7 @@
             [options]="priority"
             [showClear]="true"
             optionLabel="name"
-            placeholder="Выбрать приоритет"
+            placeholder="{{ TasksEnum.PRIORITY_PLACEHOLDER }}"
             id="priorityEdit"
             aria-describedby="priority-help"
             [ngClass]="{'ng-invalid ng-dirty': formEdit.get('priority')?.invalid && formEdit.get('priority')?.touched}"
