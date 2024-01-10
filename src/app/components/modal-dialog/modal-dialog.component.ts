@@ -5,6 +5,7 @@ import {Task} from "../../shared/interfaces/task";
 import {TaskService} from "../../shared/services/task.service";
 import {ITaskForm} from "../../shared/interfaces/itask-form";
 import {TasksEnum} from "../../shared/enums/tasks-enum";
+import {v4 as uuidv4} from "uuid";
 
 @Component({
   selector: 'app-modal-dialog',
@@ -34,6 +35,16 @@ export class ModalDialogComponent implements OnInit{
   }
 
   protected submitEdit(){
+    const taskEdit = {
+      uid: this.taskService.uid,
+      id: this.task.id,
+      name: this.formEdit.value.name,
+      description: this.formEdit.value.description,
+      category: this.formEdit.value.category,
+      deadline: this.formEdit.value.deadline,
+      priority: this.formEdit.value.priority,
+      isDone: this.task.isDone
+    }
     const status = this.task.isDone
     const id = this.task.id
     const {} = this.task = this.formEdit.value

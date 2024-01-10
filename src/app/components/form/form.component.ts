@@ -15,7 +15,7 @@ import {v4 as uuidv4} from "uuid";
 export class FormComponent implements OnInit{
 
   protected readonly TasksEnum = TasksEnum;
-  priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
+  protected priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
 
   protected form: FormGroup = new FormGroup<ITaskForm>({
     name: new FormControl(null, Validators.required),

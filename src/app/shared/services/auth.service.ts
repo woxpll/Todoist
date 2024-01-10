@@ -9,7 +9,7 @@ import {Observable, of} from "rxjs";
 @Injectable()
 export class AuthService {
 
-  users!: User[]
+  protected users: User[]
   constructor(
     private router: Router
   ) {
@@ -32,7 +32,6 @@ export class AuthService {
 
   register(user: User): Observable<boolean>{
     const userData: User | undefined = this.users.find(value => value.email === user.email)
-    console.log(userData)
     if (userData === undefined){
       user.id = uuidv4()
       this.users.push(user)

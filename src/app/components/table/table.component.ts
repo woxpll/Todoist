@@ -13,13 +13,14 @@ export class TableComponent implements OnInit{
   protected readonly TasksEnum = TasksEnum;
 
   task!: Task
-  tasks!: Task[]
+  protected tasks: Task[]
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService) {
+    this.tasks = []
+  }
 
   ngOnInit(): void {
 
-    this.tasks = []
     this.taskService.check()
     this.getAllTask()
 

@@ -8,7 +8,7 @@ import {LocalStorage} from "../enums/local-storage";
 @Injectable()
 export class TaskService{
   serviceURL: string;
-  uid!: string
+  uid: string
   tasksStorage: Task[]
   tasks: Task[]
 
@@ -21,6 +21,7 @@ export class TaskService{
   subscriberUID$: Observable<string> = this.observerUID.asObservable();
 
   constructor() {
+    this.uid = ""
     this.serviceURL = environment.apiUrl;
     this.tasksStorage = []
     this.tasks = []
