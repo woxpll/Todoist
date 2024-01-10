@@ -51,28 +51,23 @@ export class TaskService{
     return allTaskSubject$.asObservable()
   }
 
-  deleteTask(task: Task): Observable<Task> {
-    // const index = this.tasks.findIndex(n => {
-    //   if (n.id === null){
-    //     return
-    //   }
-    //   return n.id === task.id
-    // })
-    // const indexStorage = this.tasksStorage.findIndex(n => {
-    //   if (n === null){
-    //     return
-    //   }
-    //   return n.id === task.id
-    // })
-    // delete this.tasks[index]
-    // delete this.tasksStorage[indexStorage]
+  deleteFind(tasks: Task[],task: Task): number{
+    return tasks.findIndex(n => {
+      if (n.id === null) {
+        return
+      }
+      return n.id === task.id
+    })
+  }
 
-    // localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
-    // localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
+  deleteTask(task: Task): Observable<Task[]> {
+    this.tasks.splice(this.deleteFind(this.tasks, task), 1)
+    this.tasksStorage.splice(this.deleteFind(this.tasksStorage, task), 1)
 
+    localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
+    localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
 
-
-    const deleteTaskSubject$ = new BehaviorSubject<Task>(task)
+    const deleteTaskSubject$ = new BehaviorSubject<Task[]>(this.tasks)
     return deleteTaskSubject$.asObservable()
   }
 
