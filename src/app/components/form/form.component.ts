@@ -6,6 +6,7 @@ import {TaskService} from "../../shared/services/task.service";
 import {ITaskForm} from "../../shared/interfaces/itask-form";
 import {TasksEnum} from "../../shared/enums/tasks-enum";
 import {v4 as uuidv4} from "uuid";
+import {LocalStorage} from "../../shared/enums/local-storage";
 
 @Component({
   selector: 'app-form',
@@ -37,7 +38,7 @@ export class FormComponent implements OnInit{
 
   protected submit(){
     const task = {
-      uid: this.taskService.uid,
+      uid: localStorage.getItem(LocalStorage.UID)!,
       id: uuidv4(),
       name: this.form.value.name,
       description: this.form.value.description,

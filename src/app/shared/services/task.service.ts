@@ -7,7 +7,6 @@ import {LocalStorage} from "../enums/local-storage";
 @Injectable()
 export class TaskService{
 
-  public uid: string
   private tasksStorage: Task[]
   private tasks: Task[]
 
@@ -19,20 +18,19 @@ export class TaskService{
   }
 
   constructor() {
-    this.uid = ""
     this.tasksStorage = []
     this.tasks = []
   }
 
   check() {
     this.tasksStorage = JSON.parse(localStorage.getItem(LocalStorage.TASKS)!)
-    this.uid = localStorage.getItem(LocalStorage.UID)!
+    const uid = localStorage.getItem(LocalStorage.UID)!
     if (this.tasksStorage){
       this.tasks = this.tasksStorage.filter(value => {
         if (value === null){
           return
         }
-        return value.uid === this.uid
+        return value.uid === uid
       })
     }else {
       this.tasksStorage = []
