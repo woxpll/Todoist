@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Task} from '../interfaces/task';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {environment} from "../../../environments/environmen";
@@ -10,9 +9,6 @@ import {LocalStorage} from "../enums/local-storage";
 export class TaskService{
   serviceURL: string;
   uid!: string
-
-  // uid = JSON.parse(this.uid$);
-
   tasksStorage: Task[]
   tasks: Task[]
 
@@ -24,20 +20,13 @@ export class TaskService{
   subscriberEdit$: Observable<Task> = this.observerEdit.asObservable();
   subscriberUID$: Observable<string> = this.observerUID.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.serviceURL = environment.apiUrl;
     this.tasksStorage = []
     this.tasks = []
   }
 
   check() {
-    // this.http
-    //   .get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`)
-    //   .subscribe((data) => {
-    //     if (data.length === 0) {
-    //       this.createNewUser(this.uid);
-    //     }
-    //   });
     this.tasksStorage = JSON.parse(localStorage.getItem(LocalStorage.TASKS)!)
     this.uid = localStorage.getItem(LocalStorage.UID)!
     if (this.tasksStorage){
@@ -53,34 +42,15 @@ export class TaskService{
     }
   }
 
-  emitData(data: Task) {
-    this.observer.next(data);
-  }
-
-  emitEditData(data: Task) {
-    this.observerEdit.next(data);
-  }
-
-  emitUIDData(uid: string) {
-    this.observerUID.next(uid);
-  }
-
   addTask(task: Task) {
-    if (this.tasksStorage.length > 0){
-      task.id = this.tasksStorage.length + 1
-    }else {
-      task.id = 0
-    }
     this.tasks.push(task)
     this.tasksStorage.push(task)
     localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
     localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
-    // return this.http.post<Task>(this.serviceURL, task);
   }
   getAllTask(): Observable<Task[]> {
     const allTaskSubject$ = new BehaviorSubject<Task[]>(this.tasks)
     return allTaskSubject$.asObservable()
-    // return this.http.get<Task[]>(`${this.serviceURL}/?uid=${this.uid}`);
   }
   deleteTask(task: Task): Observable<Task> {
     const index = this.tasks.findIndex(n => {
@@ -103,7 +73,6 @@ export class TaskService{
 
     const deleteTaskSubject$ = new BehaviorSubject<Task>(task)
     return deleteTaskSubject$.asObservable()
-    // return this.http.delete<Task>(`${this.serviceURL}/${task.id}`);
   }
   editTask(taskEdit: Task): Observable<Task> {
     this.tasksStorage = this.tasks = this.tasks.reduce((acc: Task[], task: Task): Task[] => {
@@ -125,10 +94,5 @@ export class TaskService{
     localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
     const editTaskSubject$ = new BehaviorSubject<Task>(taskEdit)
     return editTaskSubject$.asObservable()
-    // return this.http.put<Task>(`${this.serviceURL}/${task.id}`, task);
-  }
-
-  createNewUser(uid: string) {
-    this.emitUIDData(uid);
   }
 }

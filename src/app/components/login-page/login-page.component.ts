@@ -13,10 +13,12 @@ import {Message} from "primeng/api";
 })
 export class LoginPageComponent implements OnInit, OnDestroy{
 
-  protected form!: FormGroup
-  private aSub!: Subscription
-
-  protected messages!: Message[]
+  protected form: FormGroup = new FormGroup<ISignForm>({
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    password: new FormControl(null,[Validators.required, Validators.minLength(6)])
+  })
+  private aSub: Subscription = new Subscription;
+  protected messages: Message[] = []
 
   constructor(private auth: AuthService,
               private router: Router,
@@ -24,11 +26,6 @@ export class LoginPageComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.form = new FormGroup<ISignForm>({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null,[Validators.required, Validators.minLength(6)])
-    })
-
     this.route.queryParams.subscribe((params: Params) => {
       if(params["registered"]){
         this.messages = [
@@ -40,10 +37,6 @@ export class LoginPageComponent implements OnInit, OnDestroy{
         ];
       }
     })
-
-    // if(localStorage.getItem("user") != null){
-    //   this.router.navigate(['/dashboard'])
-    // }
   }
   ngOnDestroy(): void {
     if (this.aSub){
