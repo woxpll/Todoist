@@ -49,6 +49,8 @@ export class TableComponent implements OnInit{
   }
 
   protected doneTask(task: Task){
-    this.taskService.doneTask(task)
+    this.taskService.doneTask(task).subscribe((data) => {
+      this.tasks = data
+    })
   }
 }

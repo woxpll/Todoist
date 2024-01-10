@@ -97,8 +97,13 @@ export class TaskService{
     return editTaskSubject$.asObservable()
   }
 
-  doneTask(task: Task){
-    this.tasksStorage.forEach((taskDone) => taskDone.id === task.id ? task.isDone = false : task.isDone = true)
-    console.log(this.tasks)
+  doneTask(task: Task): Observable<Task[]>{
+    this.tasksStorage.forEach((taskDone) => {
+      taskDone.id === task.id ? task.isDone = !taskDone.isDone : 0
+    })
+    localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
+    localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
+    const doneTaskSubject$ = new BehaviorSubject<Task[]>(this.tasks)
+    return doneTaskSubject$.asObservable()
   }
 }
