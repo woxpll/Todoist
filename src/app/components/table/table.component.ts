@@ -3,11 +3,14 @@ import {Task} from "../../shared/interfaces/task";
 import {TaskService} from "../../shared/services/task.service";
 import {TasksEnum} from "../../shared/enums/tasks-enum";
 import {Observable, Subject, takeUntil} from "rxjs";
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {DynamicDialogComponent} from "../dynamic-dialog/dynamic-dialog.component";
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  providers: [DialogService]
 })
 export class TableComponent implements OnInit, OnDestroy{
 
@@ -15,7 +18,10 @@ export class TableComponent implements OnInit, OnDestroy{
   protected tasks: Observable<Task[]> = this.taskService.getAllTask()
   private aSub: Subject<void> = new Subject<void>()
 
-  constructor(private taskService: TaskService) {
+  ref: DynamicDialogRef | undefined;
+
+  constructor(private taskService: TaskService,
+              public dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -29,6 +35,23 @@ export class TableComponent implements OnInit, OnDestroy{
     ).subscribe(data => {
       this.addTask(data)
     })
+  }
+
+  editAddDialog() {
+    this.ref = this.dialogService.open(DynamicDialogComponent, {
+      dismissableMask: true,
+      modal: true,
+      keepInViewport: true,
+      header: 'Измение задачи',
+      data: {
+        edit: this.check()
+      }
+    });
+  }
+
+  check(){
+    console.log(1)
+    return 1
   }
 
   private addTask(task: Task){

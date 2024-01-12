@@ -29,6 +29,7 @@ import { TableComponent } from './components/table/table.component';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { RippleModule } from 'primeng/ripple'
 import {MessagesModule} from "primeng/messages";
+import { DynamicDialogComponent } from './components/dynamic-dialog/dynamic-dialog.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import {MessagesModule} from "primeng/messages";
     FormComponent,
     TableComponent,
     ModalDialogComponent,
+    DynamicDialogComponent,
   ],
   imports: [
     BrowserModule,

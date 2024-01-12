@@ -50,6 +50,7 @@ export class TaskService{
   }
 
   getAllTask(): Observable<Task[]> {
+    console.log(this.filterUserTask())
     const allTaskSubject$ = new BehaviorSubject<Task[]>(this.filterUserTask())
     return allTaskSubject$.asObservable()
   }

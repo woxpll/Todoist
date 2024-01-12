@@ -45,6 +45,10 @@
           (onClick)="doneTask(task)"
           icon="pi pi-check"
         ></p-button>
+        <p-button
+          (click)="editAddDialog()"
+          icon="pi pi-pencil"
+        ></p-button>
         <app-modal-dialog [task]="task"></app-modal-dialog>
         <p-button
           icon="pi pi-times"
