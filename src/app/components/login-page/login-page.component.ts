@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../shared/services/auth.service";
-import {Subscription} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ISignForm} from "../../shared/interfaces/isign-form";
 import {Redirection} from "../../shared/enums/redirection";
@@ -17,7 +17,7 @@ export class LoginPageComponent implements OnInit, OnDestroy{
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null,[Validators.required, Validators.minLength(6)])
   })
-  private aSub: Subscription = new Subscription;
+  private aSub: Subject<void> = new Subject<void>()
   protected messages: Message[] = []
 
   constructor(private auth: AuthService,
@@ -39,14 +39,15 @@ export class LoginPageComponent implements OnInit, OnDestroy{
     })
   }
   ngOnDestroy(): void {
-    if (this.aSub){
-      this.aSub.unsubscribe()
-    }
+    this.aSub.next()
+    this.aSub.unsubscribe()
   }
 
   protected onSubmit(){
     this.form.disable()
-    this.aSub = this.auth.login(this.form.value).subscribe(
+    this.auth.login(this.form.value).pipe(
+      takeUntil(this.aSub)
+    ).subscribe(
       value => {
         if (value){
           this.router.navigate([Redirection.DASHBOARD])
