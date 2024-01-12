@@ -5,6 +5,7 @@ import {Task} from "../../shared/interfaces/task";
 import {TaskService} from "../../shared/services/task.service";
 import {ITaskForm} from "../../shared/interfaces/itask-form";
 import {TasksEnum} from "../../shared/enums/tasks-enum";
+import {PRIORITY} from "../../shared/config/constants";
 
 @Component({
   selector: 'app-modal-dialog',
@@ -15,7 +16,7 @@ export class ModalDialogComponent implements OnInit{
 
   @Input()
   public task: Task = Input()
-  protected priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
+  protected priority:Priority[] = PRIORITY
   protected formEdit: FormGroup = new FormGroup({})
 
   protected visible: boolean = false;

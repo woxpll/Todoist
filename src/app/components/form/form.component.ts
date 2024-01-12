@@ -1,22 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Priority} from "../../shared/interfaces/priority";
-import {Task} from "../../shared/interfaces/task";
 import {TaskService} from "../../shared/services/task.service";
 import {ITaskForm} from "../../shared/interfaces/itask-form";
 import {TasksEnum} from "../../shared/enums/tasks-enum";
 import {v4 as uuidv4} from "uuid";
 import {LocalStorage} from "../../shared/enums/local-storage";
+import {PRIORITY} from "../../shared/config/constants";
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit{
+export class FormComponent{
 
   protected readonly TasksEnum = TasksEnum;
-  protected priority:Priority[] = [{name: "Срочно"}, {name: "Важно"}]
+  protected priority:Priority[] = PRIORITY
 
   protected form: FormGroup = new FormGroup<ITaskForm>({
     name: new FormControl(null, Validators.required),
@@ -27,13 +27,6 @@ export class FormComponent implements OnInit{
   })
 
   constructor(private taskService: TaskService) {
-  }
-
-  ngOnInit(): void {
-  }
-
-  private addTask(task: Task){
-    this.taskService.addTask(task)
   }
 
   protected submit(){
@@ -47,7 +40,7 @@ export class FormComponent implements OnInit{
       priority: this.form.value.priority,
       isDone: false
     }
-    this.addTask(task)
+    this.taskService.addTask(task)
     this.form.reset()
   }
 }

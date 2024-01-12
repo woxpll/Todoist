@@ -20,3 +20,12 @@ export const MESSAGES = {
     detail: 'Пользаватель уже существует'
   }
 }
+
+export const PRIORITY = [
+  {
+    name: "Срочно"
+  },
+  {
+    name: "Важно"
+  }
+]
