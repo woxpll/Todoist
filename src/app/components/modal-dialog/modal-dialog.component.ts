@@ -36,8 +36,8 @@ export class ModalDialogComponent implements OnInit{
 
   protected submitEdit(){
     const taskEdit = {
-      uid: this.task.uid,
-      id: this.task.id,
+      idUser: this.task.idUser,
+      idTask: this.task.idTask,
       name: this.formEdit.value.name,
       description: this.formEdit.value.description,
       category: this.formEdit.value.category,

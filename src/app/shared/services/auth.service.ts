@@ -49,7 +49,6 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(LocalStorage.UID);
-    localStorage.removeItem(LocalStorage.TASK);
     this.router.navigate([Redirection.LOGIN]);
   }
 }

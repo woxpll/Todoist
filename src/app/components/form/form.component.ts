@@ -31,8 +31,8 @@ export class FormComponent{
 
   protected submit(){
     const task = {
-      uid: localStorage.getItem(LocalStorage.UID)!,
-      id: uuidv4(),
+      idUser: localStorage.getItem(LocalStorage.UID)!,
+      idTask: uuidv4(),
       name: this.form.value.name,
       description: this.form.value.description,
       category: this.form.value.category,
@@ -40,7 +40,7 @@ export class FormComponent{
       priority: this.form.value.priority,
       isDone: false
     }
-    this.taskService.addTask(task)
+    this.taskService.emitData(task)
     this.form.reset()
   }
 }

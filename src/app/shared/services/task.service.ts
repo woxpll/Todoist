@@ -8,70 +8,74 @@ import {LocalStorage} from "../enums/local-storage";
 export class TaskService{
 
   private tasksStorage: Task[]
-  private tasks: Task[]
 
-  observerEdit: Subject<Task> = new Subject();
-  subscriberEdit$: Observable<Task> = this.observerEdit.asObservable();
+  observer: Subject<Task> = new Subject();
+  subscriberEdit$: Observable<Task> = this.observer.asObservable();
+  subscriberAdd$: Observable<Task> = this.observer.asObservable();
 
+
+  emitData(data: Task){
+    console.log(this.observer)
+    this.observer.next(data)
+  }
   emitEditData(data: Task) {
-    this.observerEdit.next(data);
+    console.log(this.observer)
+    this.observer.next(data);
   }
 
   constructor() {
     this.tasksStorage = []
-    this.tasks = []
   }
 
-  addTask(task: Task) {
-    this.tasks.push(task)
-    this.tasksStorage.push(task)
-    localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
-    localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
-  }
-
-  getAllTask(): Observable<Task[]> {
+  filterUserTask(){
     this.tasksStorage = JSON.parse(localStorage.getItem(LocalStorage.TASKS)!)
     const uid = localStorage.getItem(LocalStorage.UID)!
     if (this.tasksStorage){
-      this.tasks = this.tasksStorage.filter(value => {
-        if (value === null){
+      return this.tasksStorage.filter(value => {
+        if (value === null) {
           return
         }
-        return value.uid === uid
+        return value.idUser === uid
       })
     }else {
-      this.tasksStorage = []
+      return this.tasksStorage = []
     }
-    const allTaskSubject$ = new BehaviorSubject<Task[]>(this.tasks)
+  }
+
+  addTask(task: Task) {
+    this.tasksStorage.push(task)
+    localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
+    const addTaskSubject$ = new BehaviorSubject<Task[]>(this.filterUserTask())
+    return addTaskSubject$.asObservable()
+  }
+
+  getAllTask(): Observable<Task[]> {
+    const allTaskSubject$ = new BehaviorSubject<Task[]>(this.filterUserTask())
     return allTaskSubject$.asObservable()
   }
 
   deleteFind(tasks: Task[],task: Task): number{
     return tasks.findIndex(n => {
-      if (n.id === null) {
+      if (n.idTask === null) {
         return
       }
-      return n.id === task.id
+      return n.idTask === task.idTask
     })
   }
 
   deleteTask(task: Task): Observable<Task[]> {
-    this.tasks.splice(this.deleteFind(this.tasks, task), 1)
     this.tasksStorage.splice(this.deleteFind(this.tasksStorage, task), 1)
-
-    localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
     localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
-
-    const deleteTaskSubject$ = new BehaviorSubject<Task[]>(this.tasks)
+    const deleteTaskSubject$ = new BehaviorSubject<Task[]>(this.filterUserTask())
     return deleteTaskSubject$.asObservable()
   }
 
   editTaskReduce(tasks: Task[], taskEdit: Task): Task[]{
     return tasks.reduce((acc: Task[], task: Task): Task[] => {
-      if (task.id === taskEdit.id) {
+      if (task.idTask === taskEdit.idTask) {
         return [...acc, {
-          uid: taskEdit.uid,
-          id: taskEdit.id,
+          idUser: taskEdit.idUser,
+          idTask: taskEdit.idTask,
           name: taskEdit.name,
           description: taskEdit.description,
           category: taskEdit.category,
@@ -85,20 +89,17 @@ export class TaskService{
   }
   editTask(taskEdit: Task): Observable<Task[]> {
     this.tasksStorage = this.editTaskReduce(this.tasksStorage, taskEdit)
-    this.tasks = this.editTaskReduce(this.tasks, taskEdit)
-    localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
     localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
-    const editTaskSubject$ = new BehaviorSubject<Task[]>(this.tasks)
+    const editTaskSubject$ = new BehaviorSubject<Task[]>(this.filterUserTask())
     return editTaskSubject$.asObservable()
   }
 
   doneTask(task: Task): Observable<Task[]>{
     this.tasksStorage.forEach((taskDone) => {
-      taskDone.id === task.id ? task.isDone = !taskDone.isDone : 0
+      taskDone.idTask === task.idTask ? task.isDone = !taskDone.isDone : 0
     })
-    localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
     localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
-    const doneTaskSubject$ = new BehaviorSubject<Task[]>(this.tasks)
+    const doneTaskSubject$ = new BehaviorSubject<Task[]>(this.filterUserTask())
     return doneTaskSubject$.asObservable()
   }
 }
