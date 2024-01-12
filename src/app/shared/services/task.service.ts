@@ -22,7 +22,14 @@ export class TaskService{
     this.tasks = []
   }
 
-  check() {
+  addTask(task: Task) {
+    this.tasks.push(task)
+    this.tasksStorage.push(task)
+    localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
+    localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
+  }
+
+  getAllTask(): Observable<Task[]> {
     this.tasksStorage = JSON.parse(localStorage.getItem(LocalStorage.TASKS)!)
     const uid = localStorage.getItem(LocalStorage.UID)!
     if (this.tasksStorage){
@@ -35,16 +42,6 @@ export class TaskService{
     }else {
       this.tasksStorage = []
     }
-  }
-
-  addTask(task: Task) {
-    this.tasks.push(task)
-    this.tasksStorage.push(task)
-    localStorage.setItem(LocalStorage.TASK, JSON.stringify(this.tasks))
-    localStorage.setItem(LocalStorage.TASKS, JSON.stringify(this.tasksStorage))
-  }
-
-  getAllTask(): Observable<Task[]> {
     const allTaskSubject$ = new BehaviorSubject<Task[]>(this.tasks)
     return allTaskSubject$.asObservable()
   }

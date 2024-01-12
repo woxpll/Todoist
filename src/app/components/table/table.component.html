@@ -1,5 +1,5 @@
 <p-table
-  [value]="tasks"
+  [value]="(tasks | async) || []"
   [tableStyle]="{ 'min-width': '50rem' }"
 >
   <ng-template pTemplate="header">

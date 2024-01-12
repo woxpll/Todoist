@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Task} from "../../shared/interfaces/task";
 import {TaskService} from "../../shared/services/task.service";
 import {TasksEnum} from "../../shared/enums/tasks-enum";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-table',
@@ -11,46 +12,26 @@ import {TasksEnum} from "../../shared/enums/tasks-enum";
 export class TableComponent implements OnInit{
 
   protected readonly TasksEnum = TasksEnum;
-
-  protected tasks: Task[]
+  protected tasks: Observable<Task[]> = this.taskService.getAllTask()
 
   constructor(private taskService: TaskService) {
-    this.tasks = []
   }
 
   ngOnInit(): void {
-
-    this.taskService.check()
-    this.getAllTask()
-
     this.taskService.subscriberEdit$.subscribe(data => {
       this.editTask(data)
     })
   }
 
-  private getAllTask(){
-    this.taskService.getAllTask().subscribe(next => {
-      this.tasks = next
-    },error => {
-      alert(error)
-    })
-  }
-
   private editTask(taskEdit: Task){
-    this.taskService.editTask(taskEdit).subscribe((data) => {
-      this.tasks = data
-    })
+    this.tasks = this.taskService.editTask(taskEdit)
   }
 
   protected deleteTask(task: Task){
-    this.taskService.deleteTask(task).subscribe((data) => {
-      this.tasks = data
-    })
+    this.tasks = this.taskService.deleteTask(task)
   }
 
   protected doneTask(task: Task){
-    this.taskService.doneTask(task).subscribe((data) => {
-      this.tasks = data
-    })
+    this.tasks = this.taskService.doneTask(task)
   }
 }
