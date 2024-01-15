@@ -33,20 +33,20 @@ export class TableComponent implements OnInit, OnDestroy{
   }
 
   editAddDialog(task: Task) {
-    this.ref = this.dialogService.open(DynamicDialogComponent, {
+    this.dialogService.open(DynamicDialogComponent, {
       dismissableMask: true,
       modal: true,
       keepInViewport: true,
       header: 'Измение задачи',
       data: {
-        task: task,
-        editTask: this.check
+        task: task
       }
-    });
-  }
-
-  check(taskEdit: Task){
-    this.taskService.check(taskEdit)
+    }).onClose.pipe(takeUntil(this.aSub))
+      .subscribe((result) => {
+        if (result){
+          this.editTask(result)
+        }
+      });
   }
 
   private addTask(task: Task){

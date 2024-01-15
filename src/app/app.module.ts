@@ -23,7 +23,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
-import { DialogModule } from 'primeng/dialog';
 import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
 import { RippleModule } from 'primeng/ripple'
@@ -58,7 +57,6 @@ import { DynamicDialogComponent } from './components/dynamic-dialog/dynamic-dial
     TableModule,
     CalendarModule,
     DropdownModule,
-    DialogModule,
     RippleModule,
     MessagesModule,
   ],

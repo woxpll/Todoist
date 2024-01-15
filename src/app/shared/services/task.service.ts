@@ -14,16 +14,11 @@ export class TaskService{
 
 
   emitData(data: Task){
-    console.log(this.observer)
     this.observer.next(data)
   }
 
   constructor() {
     this.tasksStorage = []
-  }
-
-  check(task: Task){
-    console.log(task)
   }
 
   filterUserTask(){
@@ -49,7 +44,6 @@ export class TaskService{
   }
 
   getAllTask(): Observable<Task[]> {
-    console.log(this.filterUserTask())
     const allTaskSubject$ = new BehaviorSubject<Task[]>(this.filterUserTask())
     return allTaskSubject$.asObservable()
   }

@@ -32,7 +32,6 @@ export class DynamicDialogComponent implements OnInit{
     })
   }
 
-
   submitEdit(){
     const taskEdit = {
       idUser: this.task.idUser,
@@ -44,7 +43,6 @@ export class DynamicDialogComponent implements OnInit{
       priority: this.formEdit.value.priority,
       isDone: this.task.isDone
     }
-    this.dynamicDialogConfig.data.editTask(taskEdit)
-    this.ref.close();
+    this.ref.close(taskEdit);
   }
 }
