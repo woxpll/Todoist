@@ -3,7 +3,7 @@ import {Task} from "../../shared/interfaces/task";
 import {TaskService} from "../../shared/services/task.service";
 import {TasksEnum} from "../../shared/enums/tasks-enum";
 import {Observable, Subject, takeUntil} from "rxjs";
-import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {DialogService} from "primeng/dynamicdialog";
 import {DynamicDialogComponent} from "../dynamic-dialog/dynamic-dialog.component";
 
 @Component({
@@ -17,8 +17,6 @@ export class TableComponent implements OnInit, OnDestroy{
   protected readonly TasksEnum = TasksEnum;
   protected tasks: Observable<Task[]> = this.taskService.getAllTask()
   private aSub: Subject<void> = new Subject<void>()
-
-  ref: DynamicDialogRef | undefined;
 
   constructor(private taskService: TaskService,
               public dialogService: DialogService) {
@@ -37,6 +35,8 @@ export class TableComponent implements OnInit, OnDestroy{
       dismissableMask: true,
       modal: true,
       keepInViewport: true,
+      width: '60%',
+      contentStyle: { overflow: 'hidden' },
       header: 'Измение задачи',
       data: {
         task: task

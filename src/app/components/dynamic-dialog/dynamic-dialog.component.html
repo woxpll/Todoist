@@ -65,7 +65,7 @@
     </div>
     <div class="col-5">
       <div class="field">
-        <label for="deadlineEdit">{{ TasksEnum.CATEGORY_TASK }}</label>
+        <label for="deadlineEdit">{{ TasksEnum.DEADLINE_TASK }}</label>
         <p-calendar
           class="w-full"
           dateFormat="dd.mm.yy"
@@ -88,7 +88,6 @@
       <div class="field">
         <label for="priorityEdit">{{ TasksEnum.PRIORITY_TASK }}</label>
         <p-dropdown
-          [style]="{'width':'100%'}"
           formControlName="priority"
           [options]="priority"
           [showClear]="true"
