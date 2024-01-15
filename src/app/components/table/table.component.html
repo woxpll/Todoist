@@ -46,10 +46,9 @@
           icon="pi pi-check"
         ></p-button>
         <p-button
-          (click)="editAddDialog()"
+          (click)="editAddDialog(task)"
           icon="pi pi-pencil"
         ></p-button>
-        <app-modal-dialog [task]="task"></app-modal-dialog>
         <p-button
           icon="pi pi-times"
           (click)="deleteTask(task)"

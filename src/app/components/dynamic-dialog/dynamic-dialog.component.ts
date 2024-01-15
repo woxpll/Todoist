@@ -13,16 +13,7 @@ import { Task } from 'src/app/shared/interfaces/task';
 })
 export class DynamicDialogComponent implements OnInit{
 
-  public task: Task = {
-    idUser: "123",
-    idTask: "123",
-    name: "123",
-    description: "123",
-    category: "123",
-    deadline: "123",
-    priority: {name: "Важно"},
-    isDone: false
-  }
+  public task: Task = this.dynamicDialogConfig.data.task
 
   protected readonly TasksEnum = TasksEnum;
   protected readonly priority = PRIORITY;
@@ -39,5 +30,21 @@ export class DynamicDialogComponent implements OnInit{
       deadline: new FormControl(this.task.deadline, Validators.required),
       priority: new FormControl(this.task.priority, Validators.required),
     })
+  }
+
+
+  submitEdit(){
+    const taskEdit = {
+      idUser: this.task.idUser,
+      idTask: this.task.idTask,
+      name: this.formEdit.value.name,
+      description: this.formEdit.value.description,
+      category: this.formEdit.value.category,
+      deadline: this.formEdit.value.deadline,
+      priority: this.formEdit.value.priority,
+      isDone: this.task.isDone
+    }
+    this.dynamicDialogConfig.data.editTask(taskEdit)
+    this.ref.close();
   }
 }

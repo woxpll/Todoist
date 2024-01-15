@@ -26,7 +26,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
-import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { RippleModule } from 'primeng/ripple'
 import {MessagesModule} from "primeng/messages";
 import { DynamicDialogComponent } from './components/dynamic-dialog/dynamic-dialog.component';
@@ -41,7 +40,6 @@ import { DynamicDialogComponent } from './components/dynamic-dialog/dynamic-dial
     RegisterPageComponent,
     FormComponent,
     TableComponent,
-    ModalDialogComponent,
     DynamicDialogComponent,
   ],
   imports: [

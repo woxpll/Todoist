@@ -10,7 +10,6 @@ export class TaskService{
   private tasksStorage: Task[]
 
   observer: Subject<Task> = new Subject();
-  subscriberEdit$: Observable<Task> = this.observer.asObservable();
   subscriberAdd$: Observable<Task> = this.observer.asObservable();
 
 
@@ -18,13 +17,13 @@ export class TaskService{
     console.log(this.observer)
     this.observer.next(data)
   }
-  emitEditData(data: Task) {
-    console.log(this.observer)
-    this.observer.next(data);
-  }
 
   constructor() {
     this.tasksStorage = []
+  }
+
+  check(task: Task){
+    console.log(task)
   }
 
   filterUserTask(){

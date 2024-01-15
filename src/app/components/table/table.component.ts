@@ -25,11 +25,6 @@ export class TableComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.taskService.subscriberEdit$.pipe(
-      takeUntil(this.aSub)
-    ).subscribe(data => {
-      this.editTask(data)
-    })
     this.taskService.subscriberAdd$.pipe(
       takeUntil(this.aSub)
     ).subscribe(data => {
@@ -37,21 +32,21 @@ export class TableComponent implements OnInit, OnDestroy{
     })
   }
 
-  editAddDialog() {
+  editAddDialog(task: Task) {
     this.ref = this.dialogService.open(DynamicDialogComponent, {
       dismissableMask: true,
       modal: true,
       keepInViewport: true,
       header: 'Измение задачи',
       data: {
-        edit: this.check()
+        task: task,
+        editTask: this.check
       }
     });
   }
 
-  check(){
-    console.log(1)
-    return 1
+  check(taskEdit: Task){
+    this.taskService.check(taskEdit)
   }
 
   private addTask(task: Task){
